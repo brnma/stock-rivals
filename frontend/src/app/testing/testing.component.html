@@ -1,0 +1,38 @@
+<section style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
+  <div class="card" style="align-items: center; justify-content: center">
+    <ul class="list-group list-group-flush">
+      <!-- Card Component -->
+      <li class="list-group-item">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card Component</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+          <a href="#!" class="btn btn-primary">Button</a>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <ngx-charts-line-chart
+          [view]="view"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="timeline"
+          [results]="data"
+        >
+        </ngx-charts-line-chart>
+      </li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+  </div>
+</section>
