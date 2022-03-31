@@ -1,0 +1,126 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">Brand</a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="basicNavbar.toggle()"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div
+      class="collapse navbar-collapse"
+      id="navbarSupportedContent"
+      mdbCollapse
+      #basicNavbar="mdbCollapse"
+    >
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+            >Disabled</a
+          >
+        </li>
+      </ul>
+      <!-- Left links -->
+
+      <!-- Search form -->
+      <form class="d-flex input-group w-auto">
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Type query"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-primary" type="button">
+          Search
+        </button>
+      </form>
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+
+<section style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
+  <div class="card" style="align-items: center; justify-content: center">
+    <ul class="list-group list-group-flush">
+      <!-- Card Component -->
+      <li class="list-group-item">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <img src="https://mdbootstrap.com/img/new/standard/nature/111.webp" class="img-fluid" />
+          <a href="#!">
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15)"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Card Component</h5>
+          <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the card's content.
+          </p>
+          <a href="#!" class="btn btn-primary">Button</a>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <ngx-charts-line-chart
+          [view]="view"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="timeline"
+          [results]="data"
+        >
+        </ngx-charts-line-chart>
+      </li>
+    <li class="list-group-item">
+        <!-- Tooltip -->
+        <p class="mb-0">
+          This is an example of a 
+          <a href="#" mdbTooltip="Hi! I'm tooltip">tooltip</a>
+        </p>
+        <!-- Tooltip -->
+      </li>
+      <li class="list-group-item"> 
+         <!-- Spinner -->
+        Spinner Example
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <!-- Spinner -->  
+      </li>
+      <li class="list-group-item">
+        <!--- Input fields -->
+        <mdb-form-control>
+          <input mdbInput type="text" id="form1" class="form-control" />
+          <label mdbLabel class="form-label" for="form1">Example input1</label>
+        </mdb-form-control>
+        <mdb-form-control>
+          <input mdbInput type="text" id="form1" class="form-control" />
+          <label mdbLabel class="form-label" for="form1">Example input2</label>
+        </mdb-form-control>
+        <!--- Input fields -->
+      </li>
+    </ul>
+  </div>
+</section>
