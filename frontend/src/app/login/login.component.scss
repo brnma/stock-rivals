@@ -100,6 +100,8 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
       font-weight: bold;
       letter-spacing: 6px;
       font-size: 4rem;
+      animation: slideInName 1s ease-in-out 1;
+      position: relative;
     }
   }
 }
@@ -112,5 +114,17 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
 
   100% {
     background: $bg;
+  }
+}
+
+@keyframes slideInName {
+  0% {
+    opacity: 0;
+    top: -100%;
+  }
+
+  100%{
+    opacity: 1;
+    top: 0%;
   }
 }
