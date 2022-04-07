@@ -1,0 +1,132 @@
+$bg: rgb(165, 214, 167);
+$bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1) 100%);
+
+// adjusted default font size
+// also added none-highlitable text
+* {
+  font-size: 1.6rem;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+// component container
+#login {
+  display: flex;
+  width: 100vw;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+
+  > * {
+    padding: 2rem;
+  }
+}
+
+// right side of login component
+#login_right {
+  height: 100%;
+  width: 50%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  > a {
+    text-decoration: none;
+    color: white;
+    background: $bg;
+    background: $bgGrad;
+    border-radius: 24px;
+    padding: 0.6em;
+    margin: 8px;
+  }
+
+  > a:hover {
+    animation: ease-in-out 1.5s;
+    transform: scale(1.05);
+  }
+
+  // input field for password and email container
+  #emailPass {
+    // margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input, mat-hint  {
+      padding: 2rem;
+      margin: 2rem;
+      border-radius: 16px;
+      border: 10px solid #a5d6a7;
+      box-shadow: 0 0 10px #a5d6a7;
+    }
+
+    input:focus, mat-hint:focus {
+      outline: none !important;
+      border: 10px solid #a5d6a7;
+      box-shadow: 0 0 20px #a5d6a7;
+      background: $bg;
+      animation: colorAppear 0.3s ease-in-out;
+    }
+  }
+
+  //
+  .card {
+    display: flex;
+    flex-direction: column;
+
+    // Button for login/register
+  }
+}
+
+// for left login container
+#login_left {
+  width: 50%;
+  background: $bg;
+  background: $bgGrad;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  .welcome {
+    font-size: 2rem;
+
+    > .companyName {
+      font-weight: bold;
+      letter-spacing: 6px;
+      font-size: 4rem;
+      animation: slideInName 1s ease-in-out 1;
+      position: relative;
+    }
+  }
+}
+
+// keyframe for input fields
+@keyframes colorAppear {
+  0% {
+    background: white;
+  }
+
+  100% {
+    background: $bg;
+  }
+}
+
+@keyframes slideInName {
+  0% {
+    opacity: 0;
+    top: -100%;
+  }
+
+  100%{
+    opacity: 1;
+    top: 0%;
+  }
+}

@@ -9,10 +9,24 @@
   <section id="login_right">
     <h1 style="font-size: 2rem">Welcome</h1>
     <section id="emailPass">
-      <input type="email" id="Email" class="form-control" placeholder="Email" autocomplete="off" />
-      <input type="password" id="Password" class="form-control" placeholder="Password" autocomplete="off" />
+      <input
+        type="string"
+        id="Username"
+        class="form-control"
+        placeholder="Username"
+        autocomplete="off"
+        [(ngModel)]="username"
+      />
+      <input
+        type="password"
+        id="Password"
+        class="form-control"
+        placeholder="Password"
+        autocomplete="off"
+        [(ngModel)]="password"
+      />
     </section>
     <a (click)="authenticate()">Login</a>
-    <a (click)="register()">Register</a>
+    <a routerLink="/register">Register</a>
   </section>
 </section>
