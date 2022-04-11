@@ -1,11 +1,8 @@
-const config = require('config.json');
+// Setting up mongoose with models we need
 const mongoose = require('mongoose');
 
 // Mongoose and Mongo setup
-mongoose.connect(process.env.MONGODB_URI || config.connectionString, {
-  useCreateIndex: true,
-  useNewUrlParser: true
-});
+mongoose.connect(process.env.MONGODB_URI || process.env.CONNECTIONSTRING, {});
 
 module.exports = {
   Users: require('../models/user.model')

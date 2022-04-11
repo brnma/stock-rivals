@@ -1,4 +1,3 @@
-const config = require('../config.json');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
@@ -7,14 +6,16 @@ const Users = db.Users;
 module.exports = {
   authenticate,
   getAllUsers,
-  addUser
+  register
 };
 
+// Esekia's implementation of authenticate and the rest
 async function authenticate({ username, password }) {
-  const user = await Users.findOne({ username });
+  const user = await Users.findOne({ username: username });
+
   if (user && bcrypt.compareSync(password, user.hash)) {
     const { hash, ...userWithoutHash } = user.toObject();
-    const token = jwt.sign({ sub: user.id, role: user.role }, config.secret);
+    const token = jwt.sign({ sub: user.id, role: user.role }, process.env.SECRET);
     return {
       ...userWithoutHash,
       token
@@ -24,14 +25,14 @@ async function authenticate({ username, password }) {
 
 async function getAllUsers() {
   //Returning the result of the promise.
-  return await User.find().select('-hash');
+  return await Users.find().select('-hash');
 }
 
-async function addUser(userParam) {
+async function register(userParam) {
   // validate
   if (await Users.findOne({ username: userParam.username })) {
     throw 'Username "' + userParam.username + '" is already taken';
-  } else if (await User.findOne({ email: userParam.email })) {
+  } else if (await Users.findOne({ email: userParam.email })) {
     throw 'Email "' + userParam.email + '" is already taken';
   }
 
@@ -44,4 +45,6 @@ async function addUser(userParam) {
 
   // save user
   await user.save();
+
+  return user;
 }
