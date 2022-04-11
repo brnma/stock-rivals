@@ -19,12 +19,14 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate() {
+    //Temp
+    this._snackbar.open("Implemented, but only demoing frontend part", "Error")
     // auth user here
-    this.auth.login(this.username, this.password).subscribe(()=>{
-      this.router.navigate(['/'])
-    }, ()=>{
-      this._snackbar.open("Ooop error login", "Error")
-    })
+    // this.auth.login(this.username, this.password).subscribe(()=>{
+    //   this.router.navigate(['/'])
+    // }, ()=>{
+    //   this._snackbar.open("Ooop error login", "Error")
+    // })
   }
 
   register() {

@@ -48,34 +48,37 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls; }
 
   register() {
-    if (this.registerForm.valid) {
-      this.submitted = true
-      let toSubmit = this.registerForm.value
+     //Temp
+     this._snackbar.open("Implemented, but only demoing frontend part", "Error")
 
-      toSubmit.profileImage = `${this.f['username'].value}.${this.actualImg.type.split('/')[1]}`
+    // if (this.registerForm.valid) {
+    //   this.submitted = true
+    //   let toSubmit = this.registerForm.value
 
-      // Auths by register, login, then uploading the user's profile pic
-      this.userService.register(toSubmit).subscribe((val:User) => {
-        this.authService.login(toSubmit['username'], toSubmit['password']).subscribe((val)=>{
-          this.uploadPic()
-        },()=>{
-          console.log("wtff????")
-        })
-      }, (err) => {
-        this._snackbar.open(err, "Error", {
-          duration: 3000
-        })
-        this.submitted = false
-      })
+    //   toSubmit.profileImage = `${this.f['username'].value}.${this.actualImg.type.split('/')[1]}`
+
+    //   // Auths by register, login, then uploading the user's profile pic
+    //   this.userService.register(toSubmit).subscribe((val:User) => {
+    //     this.authService.login(toSubmit['username'], toSubmit['password']).subscribe((val)=>{
+    //       this.uploadPic()
+    //     },()=>{
+    //       console.log("wtff????")
+    //     })
+    //   }, (err) => {
+    //     this._snackbar.open(err, "Error", {
+    //       duration: 3000
+    //     })
+    //     this.submitted = false
+    //   })
 
 
 
-    } else {
+    // } else {
 
-      this._snackbar.open(`${this.registerForm.value} + something wrong with form`, 'Error', {
-        duration: 3000
-      });
-    }
+    //   this._snackbar.open(`${this.registerForm.value} + something wrong with form`, 'Error', {
+    //     duration: 3000
+    //   });
+    // }
 
   }
 
