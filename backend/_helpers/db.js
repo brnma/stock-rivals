@@ -1,9 +1,0 @@
-// Setting up mongoose with models we need
-const mongoose = require('mongoose');
-
-// Mongoose and Mongo setup
-mongoose.connect(process.env.MONGODB_URI || process.env.CONNECTIONSTRING, {});
-
-module.exports = {
-  Users: require('../models/user.model')
-};
