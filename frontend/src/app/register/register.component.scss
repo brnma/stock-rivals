@@ -73,7 +73,10 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
     // Input field for file has different size than the rest
     // fixing it here oop
     #file input {
-      max-width: 400px;
+      max-width: 400px;}
+
+    #file input::file-selector-button {
+      border-radius: 24px;
     }
 
     input:focus, mat-hint:focus {
