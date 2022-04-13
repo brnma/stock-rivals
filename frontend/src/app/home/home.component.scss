@@ -1,4 +1,33 @@
 #profilePic {
-  max-width:100px;
+  max-width: 100px;
   border-radius: 80px;
+}
+
+.home {
+  display: flex;
+  gap: 3rem;
+  height: 100vh;
+  padding-inline: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+.my-performance-card {
+  flex-grow: 10;
+}
+.account-overview-card {
+  // flex-grow: 1;
+  width: 35%;
+  height: 35%;
+}
+.title {
+  text-align: center;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buying-power {
+  display: flex;
+  align-items: center;
 }

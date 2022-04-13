@@ -1,3 +1,30 @@
-<p>{{ currUser.name }}</p>
-<img [src]="currUser.profileImage" alt="" id="profilePic" />
-<p>{{ currUser.email }}</p>
+<div class="home">
+  <mat-card class="my-performance-card">Chart here</mat-card>
+
+  <mat-card class="account-overview-card">
+    <h2 class="title">Account Overview</h2>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile class="current-value">
+        <div class="display-user-values">
+          Investing:
+          <h1>${{ currentValue }}</h1>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="daily-change">
+        <div class="display-user-values">
+          Today's Change:
+          <div class="flex-center">
+            <!-- <mat-icon>arrow_drop_down</mat-icon> -->
+            <mat-icon>arrow_drop_up</mat-icon>
+            <h1>%{{ dailyChange }}</h1>
+          </div>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+    <div class="buying-power">
+      Buying Power:&nbsp;
+      <h2>${{ buyingPower }}</h2>
+    </div>
+  </mat-card>
+</div>
