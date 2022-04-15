@@ -21,7 +21,7 @@
       <mat-grid-tile class="current-value">
         <div class="display-user-values">
           Investing:
-          <h1>${{ currentValue }}</h1>
+          <h1 class="positive">${{ currentValue }}</h1>
         </div>
       </mat-grid-tile>
 
@@ -30,15 +30,15 @@
           Today's Change:
           <div class="flex-center">
             <!-- <mat-icon>arrow_drop_down</mat-icon> -->
-            <mat-icon>arrow_drop_up</mat-icon>
-            <h1>%{{ dailyChange }}</h1>
+            <h1 class="positive">%{{ dailyChange }}</h1>
+            <mat-icon class="positive">arrow_drop_up</mat-icon>
           </div>
         </div></mat-grid-tile
       >
     </mat-grid-list>
-    <div class="buying-power">
+    <div style="display: flex; align-items: center">
       Buying Power:&nbsp;
-      <h2>${{ buyingPower }}</h2>
+      <h2 class="buying-power">${{ buyingPower }}</h2>
     </div>
   </mat-card>
 </div>

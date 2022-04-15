@@ -3,6 +3,17 @@
   border-radius: 80px;
 }
 
+.positive {
+  font-size: 3rem;
+  color: lightgreen;
+}
+.negative {
+  font-size: 3rem;
+  color: red;
+}
+.buying-power {
+  font-size: 2rem;
+}
 .home {
   display: flex;
   gap: 3rem;
