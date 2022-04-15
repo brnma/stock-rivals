@@ -1,5 +1,45 @@
 <app-navbar></app-navbar>
+<div class="home">
+  <mat-card class="my-performance-card">
+    <ngx-charts-line-chart
+      [view]="view"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="data"
+    >
+    </ngx-charts-line-chart>
+  </mat-card>
 
-<p>{{ currUser.name }}</p>
-<img [src]="currUser.profileImage" alt="" id="profilePic" />
-<p>{{ currUser.email }}</p>
+  <mat-card class="account-overview-card">
+    <h2 class="title">Account Overview</h2>
+    <mat-grid-list cols="2" rowHeight="2:1">
+      <mat-grid-tile class="current-value">
+        <div class="display-user-values">
+          Investing:
+          <h1 class="positive">${{ currentValue }}</h1>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile class="daily-change">
+        <div class="display-user-values">
+          Today's Change:
+          <div class="flex-center">
+            <!-- <mat-icon>arrow_drop_down</mat-icon> -->
+            <h1 class="positive">%{{ dailyChange }}</h1>
+            <mat-icon class="positive">arrow_drop_up</mat-icon>
+          </div>
+        </div></mat-grid-tile
+      >
+    </mat-grid-list>
+    <div style="display: flex; align-items: center">
+      Buying Power:&nbsp;
+      <h2 class="buying-power">${{ buyingPower }}</h2>
+    </div>
+  </mat-card>
+</div>
