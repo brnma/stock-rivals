@@ -1,3 +1,4 @@
+import { SettingsComponent } from './settings/settings.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -20,18 +21,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SettingsComponent } from './settings/settings.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TestingComponent,
-    LoginComponent,
-    NavbarComponent,
-    RegisterComponent,
-    HomeComponent,
-    SettingsComponent
-  ],
+  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,12 +33,13 @@ import { SettingsComponent } from './settings/settings.component';
     NgxChartsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatCardModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatGridListModule,
     MatIconModule,
+    MatCardModule,
     MatSlideToggleModule
   ],
   providers: [
