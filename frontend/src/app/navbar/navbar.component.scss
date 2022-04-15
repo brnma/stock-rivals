@@ -3,7 +3,6 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
 
 nav {
   display: flex;
-  padding: 10px;
   z-index: 999;
   flex-direction: row;
   align-items: center;
@@ -31,9 +30,19 @@ a:hover {
   transition-duration: 1s;
 }
 
-img {
+.profilePic {
   max-width: 75px;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo {
+  background: $bgGrad;
+  margin-right: 32px;
+}
+
+.logo > img {
+  max-width: 100px;
   object-fit: cover;
 }
 
