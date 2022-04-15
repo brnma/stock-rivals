@@ -1,0 +1,58 @@
+$bg: rgb(165, 214, 167);
+$bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1) 100%);
+
+nav {
+  display: flex;
+  z-index: 999;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  flex: 1;
+  color: $bgGrad;
+  padding-left: 10px;
+}
+
+a {
+  flex: 1;
+  color: black;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+}
+
+a:hover {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: scaleX(1.05);
+  color: $bg;
+  transition-duration: 1s;
+}
+
+.profilePic {
+  max-width: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo {
+  background: $bgGrad;
+  margin-right: 32px;
+}
+
+.logo > img {
+  max-width: 100px;
+  object-fit: cover;
+}
+
+h5 {
+  margin: 0;
+  padding: 8px;
+  font-weight: 200;
+  font-size: 1em;
+}
+
+h5 > span {
+  font-size: 1.5em;
+}

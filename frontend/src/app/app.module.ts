@@ -1,3 +1,6 @@
+import { SettingsComponent } from './settings/settings.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,10 +22,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent],
+  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,13 +33,14 @@ import { MatIconModule } from '@angular/material/icon';
     NgxChartsModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatCardModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
     HttpClientModule,
     MatSnackBarModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule,
+    MatSlideToggleModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

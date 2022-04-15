@@ -1,1 +1,13 @@
-<p>navbar works!</p>
+<nav>
+  <div class="logo">
+    <img src="/assets/transparent.png" />
+  </div>
+  <a routerLink="/">Home</a>
+  <a routerLink="/trade">Trade</a>
+  <a routerLink="/settings">Settings</a>
+  <a routerLink="/credits">Credits</a>
+  <h5>
+    Hello, {{ name }}! You have <span style="color: green">{{ cashAmt }}$</span>!
+  </h5>
+  <img [src]="profilePic" class="profilePic" />
+</nav>
