@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {data}from './data';
+import { data } from './data';
 
 @Component({
   selector: 'app-testing',
@@ -8,7 +8,7 @@ import {data}from './data';
 })
 export class TestingComponent implements OnInit {
   data = data;
-  view:[number, number] = [700, 300];
+  view: [number, number] = [700, 300];
 
   // options
   legend: boolean = true;
@@ -22,10 +22,7 @@ export class TestingComponent implements OnInit {
   yAxisLabel: string = 'Profit';
   timeline: boolean = true;
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

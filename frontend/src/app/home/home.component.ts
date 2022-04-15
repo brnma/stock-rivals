@@ -9,17 +9,14 @@ import { User } from '../_models/user';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  currUser!: User;
+  profilePic: string = '';
 
-  currUser!:User;
-  profilePic:string="";
-
-  constructor(private auth:AuthService, private user:UserService) {
-    this.currUser = this.auth.getUserVal
+  constructor(private auth: AuthService, private user: UserService) {
+    this.currUser = this.auth.getUserVal;
     // 👇this api is exposed to use for public images
-    this.currUser.profileImage = `http://localhost:3000/imgs/${this.currUser.profileImage}`
-   }
-
-  ngOnInit(): void {
+    this.currUser.profileImage = `http://localhost:3000/imgs/${this.currUser.profileImage}`;
   }
 
+  ngOnInit(): void {}
 }

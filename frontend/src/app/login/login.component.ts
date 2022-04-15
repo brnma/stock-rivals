@@ -9,18 +9,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  username:string = "";
-  password:string = "";
+  username: string = '';
+  password: string = '';
 
-  constructor(private router:Router, private auth:AuthService, private _snackbar:MatSnackBar) { }
+  constructor(private router: Router, private auth: AuthService, private _snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
-    console.log(this.auth.getUserVal)
+    console.log(this.auth.getUserVal);
   }
 
   authenticate() {
     //Temp
-    this._snackbar.open("Implemented, but only demoing frontend part", "Error")
+    this._snackbar.open('Implemented, but only demoing frontend part', 'Error');
     // auth user here
     // this.auth.login(this.username, this.password).subscribe(()=>{
     //   this.router.navigate(['/'])
@@ -31,6 +31,6 @@ export class LoginComponent implements OnInit {
 
   register() {
     // register user
-    this.router.navigate(['/register'])
+    this.router.navigate(['/register']);
   }
 }
