@@ -17,10 +17,11 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
 #login {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: fixed;
 
   > * {
     padding: 2rem;
@@ -30,10 +31,13 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
 // right side of login component
 #login_right {
   width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   > a {
     text-decoration: none;
@@ -86,25 +90,21 @@ $bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1
 // for left login container
 #login_left {
   width: 50%;
+  height: 100%;
   background: $bg;
   background: $bgGrad;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
 
-  .welcome {
-    font-size: 2rem;
-
-    > .companyName {
-      font-weight: bold;
-      letter-spacing: 6px;
-      font-size: 4rem;
-      animation: slideInName 1s ease-in-out 1;
-      position: relative;
-    }
+  .companyLogo {
+    font-weight: bold;
+    letter-spacing: 6px;
+    font-size: 4rem;
+    animation: slideInName 1s ease-in-out 1;
+    max-width: 500px;
   }
 }
 
