@@ -1,29 +1,28 @@
 <app-navbar></app-navbar>
+<section class="container">
+  <h1 class="center">Settings<span class="material-icons">settings</span></h1>
 
-<mat-card class="settings-card">
-  <mat-card-content>
-    <section>
-      <div>Settings</div>
-      <span class="material-icons">settings</span>
-
-      <h3>Dark Mode</h3>
-      <mat-slide-toggle></mat-slide-toggle>
-      <p>
-        <mat-form-field appearance="fill">
-          <mat-label>Fill form field</mat-label>
-          <input matInput placeholder="Username" />
-          <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-          <mat-hint>Hint</mat-hint>
-        </mat-form-field>
-      </p>
-      <h2>Profile Picture</h2>
-      <div class="example-button-container">
-        <button mat-button color="warn">
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </section>
-
+  <div class="center">
+    <h3>Dark Mode</h3>
+    <mat-slide-toggle></mat-slide-toggle>
+  </div>
+  <p class="center">
+    <mat-form-field appearance="fill">
+      <mat-label>Fill form field</mat-label>
+      <input matInput placeholder="Username" />
+      <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+  </p>
+  <div class="center">
+    <h2>Profile Picture</h2>
+    <div class="example-button-container">
+      <button mat-button color="warn">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="center">
     <button mat-button color="warn">Sign Out</button>
-  </mat-card-content>
-</mat-card>
+  </div>
+</section>
