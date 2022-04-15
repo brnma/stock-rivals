@@ -21,9 +21,10 @@ import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
-  declarations: [AppComponent, TestingComponent],
+  declarations: [AppComponent, TestingComponent, NavbarComponent],
   imports: [BrowserModule, AppRoutingModule,
     MdbAccordionModule,
     MdbCarouselModule,

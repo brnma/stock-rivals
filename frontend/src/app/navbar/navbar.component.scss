@@ -1,0 +1,49 @@
+// TODO ADD GRADIENT
+$bgGrad: 'green';
+// $bgGrad: 'linear-gradient(to right, #f6d365, #fda085)';
+
+nav {
+  display: flex;
+  padding: 10px;
+  z-index: 999;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+}
+
+h1 {
+  flex: 1;
+  color: $bgGrad;
+}
+
+a {
+  flex:1;
+  color: black;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+}
+
+a:hover {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: scaleX(1.05);
+  color: $bgGrad;
+  transition-duration: 1s;
+}
+
+img {
+  max-width: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+h5 {
+  margin: 0;
+  padding: 8px;
+  font-weight: 500;
+  font-weight: 200;
+}
+
+h5 > span {
+  font-size: 1.2em;
+}
