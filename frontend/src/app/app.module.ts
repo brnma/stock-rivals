@@ -22,9 +22,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { TradeComponent } from './trade/trade.component';
 
 @NgModule({
-  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent],
+  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent, TradeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
