@@ -19,13 +19,29 @@ import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { TradeComponent } from './trade/trade.component';
 
 @NgModule({
-  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent],
+  declarations: [
+    AppComponent,
+    TestingComponent,
+    LoginComponent,
+    NavbarComponent,
+    RegisterComponent,
+    HomeComponent,
+    SettingsComponent,
+    TradeComponent
+  ],
   imports: [
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     RouterModule,

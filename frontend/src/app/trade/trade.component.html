@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="trading">
+  <mat-card class="chart-card">
+    <div>
+      <ngx-charts-line-chart
+        [view]="view"
+        [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxis]="xAxis"
+        [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        [timeline]="timeline"
+        [results]="data"
+      >
+      </ngx-charts-line-chart>
+    </div>
+  </mat-card>
+  <div class="trade-card-container">
+    <mat-card class="trade-card">
+      <mat-card-title>Trade</mat-card-title>
+      <mat-grid-list cols="2" rowHeight="4:1">
+        <mat-grid-tile class="">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Ticker</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Order Type</mat-label>
+            <mat-select>
+              <mat-option value="one">Market Order</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Action</mat-label>
+            <mat-select>
+              <mat-option value="one">Buy</mat-option>
+              <mat-option value="two">Sell</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Quantity</mat-label>
+            <input matInput />
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <button mat-stroked-button>Purchase</button>
+    </mat-card>
+  </div>
+</div>
