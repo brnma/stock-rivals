@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<section class="container">
+<section class="container" style="padding-top: 2rem">
   <h1 class="center">Settings<span class="material-icons">settings</span></h1>
 
   <div class="center">
@@ -7,15 +7,14 @@
     <mat-slide-toggle></mat-slide-toggle>
   </div>
   <p class="center">
-    <mat-form-field appearance="fill">
-      <mat-label>Fill form field</mat-label>
-      <input matInput placeholder="Username" />
+    <mat-form-field appearance="outline">
+      <mat-label>Change Screen Name</mat-label>
+      <input matInput placeholder="name" />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      <mat-hint>Hint</mat-hint>
     </mat-form-field>
   </p>
   <div class="center">
-    <h2>Profile Picture</h2>
+    <h2 style="padding-top: 15px">Profile Picture</h2>
     <div class="example-button-container">
       <button mat-button color="warn">
         <mat-icon>add</mat-icon>
