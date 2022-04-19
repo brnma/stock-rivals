@@ -6,13 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { TradeComponent } from './trade/trade.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {GroupComponent} from './group/group.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'trade', component: TradeComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent },
+  {path: 'group', component: GroupComponent}
 ];
 
 @NgModule({

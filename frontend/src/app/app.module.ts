@@ -26,6 +26,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TradeComponent } from './trade/trade.component';
+import { GroupComponent } from './group/group.component';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import {IgxAvatarModule} from "igniteui-angular";
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { TradeComponent } from './trade/trade.component';
     RegisterComponent,
     HomeComponent,
     SettingsComponent,
-    TradeComponent
+    TradeComponent,
+    GroupComponent
   ],
   imports: [
     MatButtonModule,
@@ -56,7 +61,10 @@ import { TradeComponent } from './trade/trade.component';
     MatGridListModule,
     MatIconModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    IgxAvatarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -64,4 +72,5 @@ import { TradeComponent } from './trade/trade.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
