@@ -15,12 +15,12 @@ const stockService = require('../services/stocks.service');
 module.exports = { grabHistoricalData, grabUserStocks, buyStocks, sellStocks };
 
 async function grabHistoricalData(req, res, next) {
-  // try {
-  //   const data = await stockService.grabHistoricalData(req.params.symbol);
-  //   res.json();
-  // } catch (error) {
-  //   res.estatus(400).json(error);
-  // }
+  try {
+    const data = await stockService.grabHistoricalData(req.params.symbol);
+    res.json(data);
+  } catch (error) {
+    res.status(400).json(error);
+  }
 }
 
 async function grabUserStocks(req, res, next) {

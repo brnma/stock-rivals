@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
 const Stocks = db.Stocks;
 const Users = db.USers;
-const data = require('../models/TSLA');
+const TSLAdata = require('../models/TSLA');
 
 module.exports = {
   grabHistoricalData,
@@ -12,23 +12,21 @@ module.exports = {
 
 // grab the specified stock's data for the past X days/months/years/...
 async function grabHistoricalData(symbol) {
-  // if (!symbol) throw 'No stock symbol specified';
-  // console.log('grabHistoricalData');
-  // // data is formated for ngx charts compatibility
-  // const data = {
-  //   name: symbol,
-  //   series: [{ value: Number, date: String }]
-  // };
-  // // do api calls here
-  // const response = [1, 2, 3];
-  // response.data.map((item) => {
-  //   data.series.push({
-  //     value: item.close,
-  //     date: item.date
-  //   });
-  // });
-  // console.log(data);
-  // return 'hi';
+  if (!symbol) throw 'No stock symbol specified';
+  // data is formated for ngx charts compatibility
+  const data = {
+    name: symbol,
+    series: []
+  };
+  // get data from api
+  const response = TSLAdata; //TODO: change to api call
+  response.data.map((item) => {
+    data.series.push({
+      value: item.close,
+      date: item.date
+    });
+  });
+  return data;
 }
 
 // get latest data for each stock in user's portfolio
