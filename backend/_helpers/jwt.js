@@ -7,7 +7,7 @@ function jwt() {
   const secret = process.env.SECRET;
   // Ignoring paths from listed ones, imgs for public profile images
   return new ejwt({ secret: secret, isRevoked: isRevoked, algorithms: ['HS256'] }).unless({
-    path: ['/', '/user/login', '/user/register', /\/imgs/]
+    path: ['/', '/user/login', '/user/register', /\/imgs/, '/stocks']
   });
 }
 
