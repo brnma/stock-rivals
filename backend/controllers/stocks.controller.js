@@ -25,7 +25,7 @@ async function grabHistoricalData(req, res, next) {
 
 async function grabUserStocks(req, res, next) {
   try {
-    const data = await stockService.grabUserStocks(req.user.sub);
+    const data = await stockService.grabUserStocks('6261be0f83f2bb4aebdf23a5'); //req.user.sub);
     res.json(data);
   } catch (error) {
     res.status(400).json(error);
@@ -38,7 +38,10 @@ async function buyStocks(req, res, next) {
     // const stockBuyingData = req.body
     // TODO amountShares and value and symbol
     // const {amtShares, value, symbol} = req.body
-    // const currentDay = Do api call here to get current stock symbol data
+    // const {amtShares, value, symbol} = req.body
+    // const currentDay = await fetch(
+    //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
+    // );
 
     const stockBuyingData = {
       amtSharesBuy: 10,
@@ -61,7 +64,7 @@ async function sellStocks(req, res, next) {
     // TODO amountShares and value and symbol
     // const {amtShares, value, symbol} = req.body
     // const currentDay = await fetch(
-    //   `https://api.marketstack.com/v1/intraday?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
+    //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
     // );
     const stockSellingData = {
       amtSharesSell: 9,
@@ -78,15 +81,24 @@ async function sellStocks(req, res, next) {
   }
 }
 
-// db.users.insert(
-//   {
-//     username: "dark7storm",
-//     profileImage: "dark7storm.jpeg",
-//     hash: "weeee",
-//     email: "mail@mail.com",
-//     stocks: [],
-//     prevValue: 1000,
-//     buyingPower: 1000,
-//     currValue: 1000
-//   }
-// )
+// db.users.insert({
+//   username: 'dark7storm',
+//   profileImage: 'dark7storm.jpeg',
+//   hash: 'weeee',
+//   email: 'mail@mail.com',
+//   stocks: [
+//     {
+//       symbol: 'TSLA',
+//       shares: 10,
+//       value: 20
+//     },
+//     {
+//       symbol: 'AAPL',
+//       shares: 1,
+//       value: 100
+//     }
+//   ],
+//   prevValue: 1000,
+//   buyingPower: 1000,
+//   currValue: 1000
+// });

@@ -3,7 +3,7 @@ var router = express.Router();
 const stocksController = require('../controllers/stocks.controller');
 
 // for trade screen
-router.get('/:symbol', stocksController.grabHistoricalData);
+router.get('/chartData/:symbol', stocksController.grabHistoricalData);
 
 // for home screen to display user stocks
 router.get('/getValues', stocksController.grabUserStocks);
