@@ -4,6 +4,7 @@ const db = require('../_helpers/db');
 const Stocks = db.Stocks;
 const Users = db.Users;
 const TSLAdata = require('../models/TSLA');
+const { default: axios } = require('axios');
 
 module.exports = {
   grabHistoricalData,
@@ -33,42 +34,34 @@ async function grabHistoricalData(symbol) {
 
 // get latest data for each stock in user's portfolio
 async function grabUserStocks(userId) {
-  const user = await findUser(userId);
-  // update stocks with latest data
+  let user = await findUser(userId);
   let response = {
-    pagination: {
-      limit: 100,
-      offset: 0,
-      count: 1,
-      total: 1
-    },
-    data: [
-      {
-        open: 169.11,
-        high: 171.535,
-        low: 167.875,
-        last: 7.9,
-        close: 167.23,
-        volume: 1591370,
-        date: '2022-04-21T18:00:00+0000',
-        symbol: 'AAPL',
-        exchange: 'IEXG'
-      }
-    ]
+    data: {
+      data: [
+        {
+          open: 169.11,
+          last: 0,
+          close: 167.23
+        }
+      ]
+    }
   };
-  //TODO replace with for loop (or foreach if compatibale) to use async for API calls
-  const newStockArr = user.stocks.map((stock) => {
-    // stock.symbol -> api call
-    // api call with the current symbol
-    let updatedStock = response.data[0];
-    return { ...stock, value: updatedStock.last };
-  });
-  // console.log(newStockArr);
-  console.log(user.currValue + ' before');
-  await user.updateOne({ stocks: newStockArr });
-  user.currValue = calcValue(user.stocks);
-  console.log(user.currValue + ' after');
-  return user.stocks;
+
+  // create new array of user's updated stocks
+  const newStocks = [];
+  for (const stock of user.stocks) {
+    //* api call with the current symbol
+    // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
+    // const response = await axios.get(api_url);
+    //* if stock market is closed then set newvalue to open price of stock
+    const newValue = response.data.data[0].last === null ? response.data.data[0].open : response.data.data[0].last;
+    newStocks.push({ ...stock, value: newValue });
+  }
+  console.log(newStocks);
+  await user.updateOne({ stocks: newStocks });
+  await user.updateOne({ prevValue: user.currValue });
+  await user.updateOne({ currValue: calcValue(newStocks) });
+  return await findUser(userId);
 }
 
 async function buyStocks(stockBuyingData, userId) {
@@ -169,16 +162,15 @@ async function findUser(userId) {
   const user = await Users.findOne({ id: userId });
   if (!user) throw 'User not found';
 
-  console.log(user);
+  // console.log(user);
 
   return user;
 }
 
 function calcValue(stocks) {
-  const calc = stocks.reduce((prev, { shares, value }) => {
-    const totalValueOfCurr = shares * value;
-    return prev + totalValueOfCurr;
+  let value = 0;
+  stocks.forEach((stock) => {
+    value += stock.shares * stock.value;
   });
-
-  return calc;
+  return value;
 }

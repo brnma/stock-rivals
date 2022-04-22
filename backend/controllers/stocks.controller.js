@@ -25,7 +25,7 @@ async function grabHistoricalData(req, res, next) {
 
 async function grabUserStocks(req, res, next) {
   try {
-    const data = await stockService.grabUserStocks('6261be0f83f2bb4aebdf23a5'); //req.user.sub);
+    const data = await stockService.grabUserStocks('62622b8a5e0a97f074405815'); //req.user.sub);
     res.json(data);
   } catch (error) {
     res.status(400).json(error);
