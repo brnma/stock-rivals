@@ -8,7 +8,6 @@ const cors = require('cors');
 
 const usersRouter = require('./routes/user.router');
 const stocksRouter = require('./routes/stocks.router');
-const axios = require('axios').default;
 // const jwt = require('./_helpers/jwt');
 
 var app = express();
