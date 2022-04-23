@@ -80,7 +80,6 @@ async function buyStocks(stockBuyingData, userId) {
 
   // checks to see if user already has the stock or not
   const stock = user.stocks.find((curr) => curr.symbol === currentDay.symbol);
-
   let newStockArr;
   if (stock) {
     // updates existing stock if exist
@@ -89,7 +88,7 @@ async function buyStocks(stockBuyingData, userId) {
       shares: amtSharesBuy + stock.shares,
       value: currentDay.value
     };
-    const oldArr = user.stocks.filter((curr) => curr.symbol === currentDay.symbol);
+    const oldArr = user.stocks.filter((curr) => curr.symbol !== currentDay.symbol);
     newStockArr = [...oldArr, updateStock];
   } else {
     // else add new stock if not
@@ -107,10 +106,11 @@ async function buyStocks(stockBuyingData, userId) {
     {
       stocks: newStockArr,
       prevValue: user.currValue,
-      buyingPower: user.cash - totalPrice,
-      currValue: calcValue(user.stocks) + buyingPower
+      buyingPower: user.currValue - totalPrice,
+      currValue: calcValue(newStockArr) + user.buyingPower
     }
   );
+  console.log(stock);
 
   return 'Success';
 }
@@ -118,7 +118,7 @@ async function buyStocks(stockBuyingData, userId) {
 async function sellStocks(stockSellingData, userId) {
   if (!stockSellingData) throw 'No stock selling data given';
   // deconstructs incoming buying data and calcs totalPrice
-  const { amtSharesSell, currentDay } = stockBuyingData;
+  const { amtSharesSell, currentDay } = stockSellingData;
   const totalPrice = amtSharesSell * currentDay.value;
 
   const user = await findUser(userId);
@@ -127,14 +127,13 @@ async function sellStocks(stockSellingData, userId) {
   // checks to see if user already has the stock or not
   const stock = user.stocks.find((curr) => curr.symbol === currentDay.symbol);
   if (!stock) throw 'Stock not found on user';
-
   // updates existing stock
   const updateStock = {
     ...stock,
     shares: stock.shares - amtSharesSell,
     value: currentDay.value
   };
-  const oldArr = user.stocks.filter((curr) => curr.symbol === currentDay.symbol);
+  const oldArr = user.stocks.filter((curr) => curr.symbol !== currentDay.symbol);
 
   let newStockArr = [...oldArr, updateStock];
 
@@ -143,8 +142,8 @@ async function sellStocks(stockSellingData, userId) {
     {
       stocks: newStockArr,
       prevValue: user.currValue,
-      buyingPower: totalPrice + stock.buyingPower,
-      currValue: calcValue(user.stocks) + buyingPower
+      buyingPower: totalPrice + user.buyingPower,
+      currValue: calcValue(newStockArr) + user.buyingPower
     }
   );
 

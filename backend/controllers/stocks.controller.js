@@ -1,4 +1,5 @@
 const stockService = require('../services/stocks.service');
+const axios = require('axios');
 
 // // for trade screen
 // router.get('/:symbol', stocksController.grabHistoricalData());
@@ -38,11 +39,20 @@ async function buyStocks(req, res, next) {
     // const stockBuyingData = req.body
     // TODO amountShares and value and symbol
     // const {amtShares, value, symbol} = req.body
-    // const {amtShares, value, symbol} = req.body
-    // const currentDay = await fetch(
+
+    // const symbol = 'AAPL';
+    // const amtShares = 9;
+    // const currentDay = await axios.get(
     //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
     // );
-
+    // console.log(currentDay.data.data);
+    // const stockBuyingData = {
+    //   amtSharesBuy: amtShares,
+    //   currentDay: {
+    //     symbol: symbol,
+    //     value: currentDay.data.data.close
+    //   }
+    // };
     const stockBuyingData = {
       amtSharesBuy: 10,
       currentDay: {
@@ -51,7 +61,7 @@ async function buyStocks(req, res, next) {
       }
     };
 
-    const success = await stockService.buyStocks(stockBuyingData, '62617d94733c8729ae590ab0');
+    const success = await stockService.buyStocks(stockBuyingData, '6262d53783aae28e839f4aef');
     res.json(success);
   } catch (error) {
     res.status(400).json(error);
@@ -63,9 +73,19 @@ async function sellStocks(req, res, next) {
     // const stockSellingData = req.body
     // TODO amountShares and value and symbol
     // const {amtShares, value, symbol} = req.body
-    // const currentDay = await fetch(
+    // const symbol = "AAPL"
+    // const amtShares = 9
+    // const currentDay = await axios.get(
     //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
     // );
+    // console.log(currentDay.data.data);
+    // const stockBuyingData = {
+    //   amtSharesSell: amtShares,
+    //   currentDay: {
+    //     symbol: share,
+    //     value: currentDay.data.data.close
+    //   }
+    // };
     const stockSellingData = {
       amtSharesSell: 9,
       currentDay: {
@@ -74,7 +94,7 @@ async function sellStocks(req, res, next) {
       }
     };
 
-    const success = await stockService.sellStocks(stockSellingData, req.user.sub);
+    const success = await stockService.sellStocks(stockSellingData, '6262d53783aae28e839f4aef');
     res.json(success);
   } catch (error) {
     res.status(400).json(error);
