@@ -26,26 +26,23 @@ async function grabHistoricalData(symbol) {
   let date_from = new Date();
   //date to is a year ago
   date_from.setFullYear(new Date().getFullYear() - 1);
-  // change date_to to a string in YYYY-MM-DD format
+  // change date to a string in YYYY-MM-DD format
   date_to = date_to.toISOString().slice(0, 10);
   date_from = date_from.toISOString().slice(0, 10);
 
   // get data from api
-  const api_url = `https://api.marketstack.com/v1/intraday?access_key=${
-    process.env.MARKETKEY
-  }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}`;
-  const response = await axios.get(api_url);
-  // const response = TSLAdata;
-  response.data.data.forEach((item) => {
-    //for TSLAdata use response.data.forEach
-    console.log(item);
+  // const api_url = `https://api.marketstack.com/v1/intraday?access_key=${
+  //   process.env.MARKETKEY
+  // }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}`;
+  // const response = await axios.get(api_url);
+  // response.data.data.forEach((item) => {
+  const response = TSLAdata; //!sandbox
+  response.data.forEach((item) => {
     data.series.push({
       value: item.last === null ? item.open : item.last,
       date: item.date
     });
-    console.log('done');
   });
-  console.log(data);
   return data;
 }
 
