@@ -3,14 +3,19 @@ const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
 const Stocks = db.Stocks;
 const Users = db.Users;
+const HistoryValue = db.HistoryValue;
 const TSLAdata = require('../models/TSLA');
 const { default: axios } = require('axios');
+const cron = require('node-cron');
+const historyValueModel = require('../models/historyValue.model');
 
 module.exports = {
   grabHistoricalData,
   grabUserStocks,
   buyStocks,
-  sellStocks
+  sellStocks,
+  grabOneStockUser,
+  getHistoricalValue
 };
 
 // grab the specified stock's data for the past X days/months/years/...
@@ -197,4 +202,55 @@ function calcValue(stocks) {
     value += stock.shares * stock.value;
   });
   return value;
+}
+
+// schedules the server to update historical value every day for each user
+function updateHistoryValue() {
+  let checked = {};
+  Users.find({}).then((users) => {
+    const currDate = new Date();
+    Promise.all(
+      users.map(async (user) => {
+        console.log(`${user.username} is updated`);
+
+        let total = 0;
+        for (const stock of user.stocks) {
+          if (!checked[stock.symbol]) {
+            // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
+            // const response = await axios.get(api_url);
+            // const newValue = response.data.data[0].last;
+            const newValue = 20;
+            checked[stock.symbol] = newValue;
+            total += newValue;
+          } else {
+            total += checked[stock.symbol];
+          }
+        }
+        const history = new HistoryValue({
+          user: user.id,
+          value: total,
+          date: currDate
+        });
+
+        history.save().then();
+      })
+    );
+  });
+}
+
+// for production; updates every 4pm our time
+// cron.schedule('* * 16 * *', updateHistoryValue);
+
+// to test every minute
+// cron.schedule('* * * * *', updateHistoryValue);
+
+async function getHistoricalValue(userId) {
+  const user = await findUser(userId);
+  console.log(user);
+  const history = await HistoryValue.find({ user: user.id });
+  console.log(history);
+  return history.map((curr) => ({
+    value: curr.value,
+    date: curr.date
+  }));
 }

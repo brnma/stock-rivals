@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGODB_URI || process.env.CONNECTIONSTRING, {});
 
 module.exports = {
-  Users: require('../models/user.model'), 
+  Users: require('../models/user.model'),
   Stocks: require('../models/stock.model'),
+  HistoryValue: require('../models/historyValue.model')
 };
