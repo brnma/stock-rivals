@@ -2,6 +2,9 @@ let express = require('express');
 var router = express.Router();
 const stocksController = require('../controllers/stocks.controller');
 
+// for home screen historical graph
+router.get('/getHistoricalValue', stocksController.grabHistoricalValue);
+
 // for trade screen
 router.get('/chartData/:symbol', stocksController.grabHistoricalData);
 
