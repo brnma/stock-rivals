@@ -8,6 +8,7 @@ const cors = require('cors');
 
 const usersRouter = require('./routes/user.router');
 const stocksRouter = require('./routes/stocks.router');
+const groupsRouter = require('./routes/groups.router');
 // const jwt = require('./_helpers/jwt');
 
 var app = express();
@@ -32,6 +33,9 @@ app.use('/user', usersRouter);
 
 //stocks route
 app.use('/stocks', stocksRouter);
+
+//groups route
+app.use('/groups', groupsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
