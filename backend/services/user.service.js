@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
 const Users = db.Users;
+const groupsService = require('./groups.service');
 
 module.exports = {
   authenticate,
@@ -36,12 +37,15 @@ async function register(userParam) {
     throw 'Email "' + userParam.email + '" is already taken';
   }
 
-  const user = new Users(userParam);
+  const gCode = await groupsService.generateGroupCode();
+
+  const user = new Users({ ...userParam, groupCode: gCode });
 
   // hash password
-  if (userParam.password) {
-    user.hash = bcrypt.hashSync(userParam.password, 10);
-  }
+  // if (userParam.password) {
+  //   user.hash = bcrypt.hashSync(userParam.password, 10);
+  // }
+  user.hash = userParam.password;
 
   // save user
   await user.save();

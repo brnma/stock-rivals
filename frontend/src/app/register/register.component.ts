@@ -38,7 +38,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     // Validators.pattern('^[a-zA-Z]+$')
     this.registerForm = this.formBuilder.group({
-      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -56,34 +55,34 @@ export class RegisterComponent implements OnInit {
 
   register() {
     //Temp
-    this._snackbar.open('Implemented, but only demoing frontend part', 'Error');
+    // this._snackbar.open('Implemented, but only demoing frontend part', 'Error');
+    if (this.registerForm.valid) {
+      this.submitted = true
+      let toSubmit ={... this.registerForm.value, groupCode: null, prevValue: 0, currValue:0, buyingPower: 50000}
 
-    // if (this.registerForm.valid) {
-    //   this.submitted = true
-    //   let toSubmit = this.registerForm.value
+      toSubmit.profileImage = `${this.f['username'].value}.${this.actualImg.type.split('/')[1]}`
 
-    //   toSubmit.profileImage = `${this.f['username'].value}.${this.actualImg.type.split('/')[1]}`
+      // Auths by register, login, then uploading the user's profile pic
+      this.userService.register(toSubmit).subscribe((val:User) => {
+        console.log(val)
+        this.authService.login(toSubmit['username'], toSubmit['password']).subscribe((val)=>{
+          this.uploadPic()
+        },()=>{
+          console.log("wtff????")
+        })
+      }, (err) => {
+        this._snackbar.open(err, "Error", {
+          duration: 3000
+        })
+        this.submitted = false
+      })
 
-    //   // Auths by register, login, then uploading the user's profile pic
-    //   this.userService.register(toSubmit).subscribe((val:User) => {
-    //     this.authService.login(toSubmit['username'], toSubmit['password']).subscribe((val)=>{
-    //       this.uploadPic()
-    //     },()=>{
-    //       console.log("wtff????")
-    //     })
-    //   }, (err) => {
-    //     this._snackbar.open(err, "Error", {
-    //       duration: 3000
-    //     })
-    //     this.submitted = false
-    //   })
+    } else {
 
-    // } else {
-
-    //   this._snackbar.open(`${this.registerForm.value} + something wrong with form`, 'Error', {
-    //     duration: 3000
-    //   });
-    // }
+      this._snackbar.open(`${this.registerForm.value} + something wrong with form`, 'Error', {
+        duration: 3000
+      });
+    }
   }
 
   back() {

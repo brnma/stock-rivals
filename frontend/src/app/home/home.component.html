@@ -2,6 +2,7 @@
 <div class="home">
   <mat-card class="my-performance-card">
     <ngx-charts-line-chart
+      (window:resize)="onResize($event)"
       [view]="view"
       [legend]="legend"
       [showXAxisLabel]="showXAxisLabel"

@@ -10,7 +10,7 @@ const schema = new Schema({
   },
   hash: { type: String, required: true },
   email: { type: String, required: true },
-  stocks: { type: [Stock] },
+  stocks: { type: [Stock], default: [] },
   prevValue: { type: Number, required: true },
   buyingPower: { type: Number, required: true },
   currValue: { type: Number, required: true },

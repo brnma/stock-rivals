@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   //chart
   data = data;
-  view: [number, number] = [1100, 700];
+  view: [number, number] = [window.innerWidth/2, window.innerHeight/1.5 ];
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -37,4 +37,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onResize(e:any){
+    console.log(e.target.innerWidth)
+    this.view=[e.target.innerWidth/2, e.target.innerHeight/1.5 ]
+  }
 }

@@ -4,7 +4,8 @@ const Users = db.Users;
 module.exports = {
   joinGroup,
   leaveGroup,
-  createGroup
+  createGroup,
+  generateGroupCode
 };
 
 async function joinGroup(userId, code) {
@@ -22,6 +23,13 @@ async function leaveGroup(userId) {
 
 async function createGroup(userId) {
   let user = await Users.findOne({ _id: userId });
+  const code = await generateGroupCode();
+  // update user with new group code
+  await user.updateOne({ groupCode: code });
+  return code;
+}
+
+async function generateGroupCode() {
   // create unique group code for new user
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let code = '';
@@ -30,7 +38,5 @@ async function createGroup(userId) {
       code += chars.charAt(Math.floor(Math.random() * chars.length));
     }
   } while (await Users.findOne({ groupCode: code }));
-  // update user with new group code
-  await user.updateOne({ groupCode: code });
   return code;
 }

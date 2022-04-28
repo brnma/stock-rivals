@@ -7,7 +7,7 @@
   <a routerLink="/settings">Settings</a>
   <a routerLink="/credits">Credits</a>
   <h5>
-    Hello, {{ name }}! You have <span style="color: green">{{ cashAmt }}$</span>!
+    Hello, {{ user.username }}! You have <span style="color: green">{{ user.buyingPower }}$</span>!
   </h5>
-  <img [src]="profilePic" class="profilePic" />
+  <img [src]="profileImg" class="profilePic" />
 </nav>
