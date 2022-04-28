@@ -8,11 +8,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'trade', component: TradeComponent },
+  { path: 'trade', component: TradeComponent, canActivate:[AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent }
+  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] }
 ];
 
 @NgModule({

@@ -42,10 +42,9 @@ async function register(userParam) {
   const user = new Users({ ...userParam, groupCode: gCode });
 
   // hash password
-  // if (userParam.password) {
-  //   user.hash = bcrypt.hashSync(userParam.password, 10);
-  // }
-  user.hash = userParam.password;
+  if (userParam.password) {
+    user.hash = bcrypt.hashSync(userParam.password, 10);
+  }
 
   // save user
   await user.save();

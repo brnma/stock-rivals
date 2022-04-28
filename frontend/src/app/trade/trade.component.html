@@ -1,57 +1,69 @@
 <app-navbar></app-navbar>
 <div class="trading">
   <mat-card class="chart-card">
-    <div>
-      <ngx-charts-line-chart
-        [view]="view"
-        [legend]="legend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxis]="xAxis"
-        [yAxis]="yAxis"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        [timeline]="timeline"
-        [results]="data"
-      >
-      </ngx-charts-line-chart>
-    </div>
+    <ngx-charts-line-chart
+      [view]="view"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="data"
+    >
+    </ngx-charts-line-chart>
   </mat-card>
   <div class="trade-card-container">
     <mat-card class="trade-card">
       <mat-card-title>Trade</mat-card-title>
+      <div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ticker</mat-label>
+          <input matInput [(ngModel)]="symbol" />
+        </mat-form-field>
+        <button mat-stroked-button (click)="getStockData()">Check ticker</button>
+      </div>
       <mat-grid-list cols="2" rowHeight="4:1">
         <mat-grid-tile class="">
           <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Ticker</mat-label>
-            <input matInput />
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile class="">
-          <mat-form-field appearance="outline" class="form-field">
             <mat-label>Order Type</mat-label>
-            <mat-select>
-              <mat-option value="one">Market Order</mat-option>
+            <mat-select [disabled]="!validTicker" [(value)]="orderType">
+              <mat-option value="market">Market Order</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile class="">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Action</mat-label>
-            <mat-select>
-              <mat-option value="one">Buy</mat-option>
-              <mat-option value="two">Sell</mat-option>
+            <mat-select [disabled]="!validTicker" [(value)]="actionType">
+              <mat-option value="buy">Buy</mat-option>
+              <mat-option value="sell">Sell</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile class="">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>Quantity</mat-label>
-            <input matInput />
+            <input
+              matInput
+              [disabled]="!validTicker"
+              type="number"
+              [(ngModel)]="quantity"
+              min="1"
+              (change)="updatePrice()"
+            />
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Price</mat-label>
+            <input matInput disabled="true" [(ngModel)]="currPrice" />
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
-      <button mat-stroked-button>Purchase</button>
+      <button mat-stroked-button (click)="purchase()">Purchase</button>
     </mat-card>
   </div>
 </div>

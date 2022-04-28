@@ -9,7 +9,7 @@ const cors = require('cors');
 const usersRouter = require('./routes/user.router');
 const stocksRouter = require('./routes/stocks.router');
 const groupsRouter = require('./routes/groups.router');
-// const jwt = require('./_helpers/jwt');
+const jwt = require('./_helpers/jwt');
 
 var app = express();
 
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // for public profile images
 app.use('/img', express.static(path.join(__dirname, 'public/imgs')));
 
-// app.use(jwt());
+app.use(jwt());
 
 app.use('/user', usersRouter);
 

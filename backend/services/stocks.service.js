@@ -42,13 +42,18 @@ async function grabHistoricalData(symbol) {
   // const response = await axios.get(api_url);
   // response.data.data.forEach((item) => {
   const response = TSLAdata; //!sandbox
+
+  response.data = response.data.reverse();
+
   response.data.forEach((item) => {
+    console.log(item);
     data.series.push({
       value: item.last === null ? item.open : item.last,
-      date: item.date
+      name: item.date.split('T')[0]
     });
   });
-  return data;
+
+  return [data];
 }
 
 // get latest data for each stock in user's portfolio

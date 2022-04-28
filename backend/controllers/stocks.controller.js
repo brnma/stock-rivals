@@ -38,7 +38,9 @@ async function buyStocks(req, res, next) {
     // TODO determine stockBuyingData model for selling it
     // const stockBuyingData = req.body
     // TODO amountShares and value and symbol
-    // const {amtShares, value, symbol} = req.body
+    const { amtShares, value, symbol } = req.body;
+
+    console.log(req.user);
 
     // const symbol = 'AAPL';
     // const amtShares = 9;
@@ -54,14 +56,14 @@ async function buyStocks(req, res, next) {
     //   }
     // };
     const stockBuyingData = {
-      amtSharesBuy: 10,
+      amtSharesBuy: amtShares,
       currentDay: {
-        symbol: 'TSLA',
-        value: 20
+        symbol: symbol,
+        value: value
       }
     };
 
-    const success = await stockService.buyStocks(stockBuyingData, '6262d53783aae28e839f4aef');
+    const success = await stockService.buyStocks(stockBuyingData, req.user.sub);
     res.json(success);
   } catch (error) {
     res.status(400).json(error);
