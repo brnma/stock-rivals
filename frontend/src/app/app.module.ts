@@ -26,6 +26,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TradeComponent } from './trade/trade.component';
+import { CreditsComponent } from './credits/credits.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TradeComponent } from './trade/trade.component';
     RegisterComponent,
     HomeComponent,
     SettingsComponent,
-    TradeComponent
+    TradeComponent,
+    CreditsComponent
   ],
   imports: [
     MatButtonModule,

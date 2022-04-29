@@ -12,7 +12,9 @@ export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router, private auth: AuthService, private _snackbar: MatSnackBar) {}
+  constructor(private router: Router, private auth: AuthService, private _snackbar: MatSnackBar) {
+    if (this.auth.getUserVal.email) this.router.navigate([''])
+  }
 
   ngOnInit(): void {
     console.log(this.auth.getUserVal);
