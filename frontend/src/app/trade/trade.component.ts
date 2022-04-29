@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ScaleType } from '@swimlane/ngx-charts';
 import { data } from '../testing/data';
 import { StockService } from '../_services/stock.service';
 
@@ -32,6 +33,10 @@ export class TradeComponent implements OnInit {
   xAxisLabel: string = 'Days';
   yAxisLabel: string = 'Profit';
   timeline: boolean = true;
+  colorScheme = {
+    name:"", selectable:true, group:ScaleType.Ordinal, 
+    domain: ['#a5d6a7']
+  }
   constructor(private stockService:StockService,private _snackbar: MatSnackBar) {}
 
   ngOnInit(): void {
