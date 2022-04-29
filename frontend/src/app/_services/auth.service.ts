@@ -18,6 +18,10 @@ export class AuthService {
     );
   }
 
+ get  getUserSubject() {
+    return this.currentUserSubject
+  }
+
   // Tries to get User is gucci
   // else returns an empty one (null basically)
   get getUserVal(): User {
@@ -40,6 +44,21 @@ export class AuthService {
         return user;
       })
     );
+  }
+
+  getUpdatedUser() {
+    // todo fix this weird bug
+    return this.http.get<User>(`http://localhost:3000/user/latestUser`).pipe(map((user) => {
+      return user
+    })).subscribe(user => {
+      const {prevValue, currValue, buyingPower} = user  
+      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower}
+        // console.log(user)
+        // console.log(this.getUserVal)
+        localStorage.setItem('currentUser', JSON.stringify(updated));
+        this.currentUserSubject.next(updated);
+        console.log(updated)
+    })
   }
 
   logout() {

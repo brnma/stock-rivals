@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ScaleType } from '@swimlane/ngx-charts';
 import { data } from '../testing/data';
+import { AuthService } from '../_services/auth.service';
 import { StockService } from '../_services/stock.service';
 
 @Component({
@@ -37,7 +38,7 @@ export class TradeComponent implements OnInit {
     name:"", selectable:true, group:ScaleType.Ordinal, 
     domain: ['#a5d6a7']
   }
-  constructor(private stockService:StockService,private _snackbar: MatSnackBar) {}
+  constructor(private stockService:StockService,private _snackbar: MatSnackBar, private auth:AuthService) {}
 
   ngOnInit(): void {
     this.updateStocksArr()
@@ -47,7 +48,6 @@ export class TradeComponent implements OnInit {
     this.stockService.grabUserStocks().subscribe((val:any)=>{
       this.currStocksArr = val.stocks
       this.validStocksArr = true
-      console.log(this.currStocksArr)
     }, (err) =>{
       this._snackbar.open('Error getting user stocks oop', undefined, {duration:2000})
     })
@@ -65,12 +65,12 @@ export class TradeComponent implements OnInit {
   getStockData(){
     console.log(this.symbol)
     this.stockService.getStockData(this.symbol).subscribe(val =>{
-      console.log(val)
       this.data = val
       this.validTicker = true
       this._snackbar.open("Valid ticker!", undefined, {duration: 2000})
       this.resetAll()
       this.updatePrice()
+      this.auth.getUpdatedUser()
     },(err)=>{
       console.log(err)
       this.validTicker = false
@@ -88,7 +88,7 @@ export class TradeComponent implements OnInit {
 
   updatePrice(){
     let currPrice = this.data[0].series[this.data[0].series.length-1].value
-    console.log(this.data[0].series[this.data[0].series.length-1].value)
+    // console.log(this.data[0].series[this.data[0].series.length-1].value)
     this.currPrice = this.quantity*currPrice
   }
 
@@ -97,24 +97,26 @@ export class TradeComponent implements OnInit {
     else {
       switch(this.actionType) {
         case "buy":
-          console.log(this.quantity)
-          console.log(this.currPrice)
+          // console.log(this.quantity)
+          // console.log(this.currPrice)
           this.stockService.buyStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
-            console.log(val)
+            // console.log(val)
             this._snackbar.open("Purchase successful!", undefined, {duration:2000})
             this.updateStocksArr()
+            this.auth.getUpdatedUser()
           }, (err) => {
             console.log(err)
             this._snackbar.open('Purchased failed oop', undefined, {duration:2000})
           })
           break;
         case "sell":
-          console.log(this.quantity)
-          console.log(this.currPrice)
+          // console.log(this.quantity)
+          // console.log(this.currPrice)
           this.stockService.sellStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
-            console.log(val)
-            this._snackbar.open("Selling successful!", undefined, {duration:2000})
             this.updateStocksArr()
+            this.auth.getUpdatedUser()
+            this._snackbar.open("Selling successful!", undefined, {duration:2000})
+
           }, (err) => {
             console.log(err)
             this._snackbar.open('Selling failed oop', undefined, {duration:2000})

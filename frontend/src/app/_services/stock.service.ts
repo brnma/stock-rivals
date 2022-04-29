@@ -31,4 +31,8 @@ export class StockService {
     grabUserStocks(){
         return this.http.get(`http://localhost:3000/stocks/getValues`)
     }
+
+    grabHistoricalValue() {
+        return this.http.get(`http://localhost:3000/stocks/getHistoricalValue`)
+    }
 }

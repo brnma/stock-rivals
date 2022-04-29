@@ -14,6 +14,7 @@
       [yAxisLabel]="yAxisLabel"
       [timeline]="timeline"
       [results]="data"
+      [scheme]="colorScheme"
     >
     </ngx-charts-line-chart>
   </mat-card>
@@ -24,7 +25,7 @@
       <mat-grid-tile class="current-value">
         <div class="display-user-values">
           Investing:
-          <h1 class="positive">${{ currentValue }}</h1>
+          <h1 class="positive">${{ currUser.currValue }}</h1>
         </div>
       </mat-grid-tile>
 
@@ -32,16 +33,21 @@
         <div class="display-user-values">
           Today's Change:
           <div class="flex-center">
-            <!-- <mat-icon>arrow_drop_down</mat-icon> -->
-            <h1 class="positive">%{{ dailyChange }}</h1>
-            <mat-icon class="positive">arrow_drop_up</mat-icon>
+            <h1 class="positive" *ngIf="currChange > 1">{{ currChange - 1.0 | percent }}</h1>
+            <h1 class="negative" *ngIf="currChange < 1">{{ 1.0 - currChange | percent }}</h1>
+            <h1 *ngIf="currChange === 1">0%</h1>
+            <mat-icon class="positive" *ngIf="currChange > 1">arrow_drop_up</mat-icon>
+            <mat-icon class="negative" *ngIf="currChange < 1">arrow_drop_down</mat-icon>
           </div>
         </div></mat-grid-tile
       >
     </mat-grid-list>
-    <div style="display: flex; align-items: center">
+    <div
+      style="display: flex; align-items: center; text-align: center; justify-content: center; flex-direction: column"
+    >
       Buying Power:&nbsp;
-      <h2 class="buying-power">${{ buyingPower }}</h2>
+      <h2 class="buying-power">${{ currUser.buyingPower }}</h2>
+      <button mat-stroked-button (click)="grabHistoricalValue()">Refresh</button>
     </div>
   </mat-card>
 </div>
