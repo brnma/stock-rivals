@@ -18,4 +18,17 @@ export class StockService {
         }
         return this.http.post(`http://localhost:3000/stocks/buy`, dataPost)
     }
+
+     sellStock(amtShares:number, value:number, symbol:string) {
+        const dataPost = {
+            amtShares: amtShares,
+            value: value,
+            symbol: symbol
+        }
+        return this.http.post(`http://localhost:3000/stocks/sell`, dataPost)
+    }
+
+    grabUserStocks(){
+        return this.http.get(`http://localhost:3000/stocks/getValues`)
+    }
 }

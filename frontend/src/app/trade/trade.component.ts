@@ -11,15 +11,17 @@ import { StockService } from '../_services/stock.service';
 export class TradeComponent implements OnInit {
   symbol:string=""
   validTicker:Boolean=false
+  validStocksArr= false
   orderType="market"
   actionType=""
   quantity=1
   currPrice=0
+  currStocksArr = []
 
   //chart
   emptyData = data
   data:any = data;
-  view: [number, number] = [1000, 500];
+  view: [number, number] = [900, 300];
   legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
@@ -32,7 +34,28 @@ export class TradeComponent implements OnInit {
   timeline: boolean = true;
   constructor(private stockService:StockService,private _snackbar: MatSnackBar) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.updateStocksArr()
+  }
+
+  updateStocksArr() {
+    this.stockService.grabUserStocks().subscribe((val:any)=>{
+      this.currStocksArr = val.stocks
+      this.validStocksArr = true
+      console.log(this.currStocksArr)
+    }, (err) =>{
+      this._snackbar.open('Error getting user stocks oop', undefined, {duration:2000})
+    })
+  }
+
+  getHintText() {
+    let curr:any = this.currStocksArr.find((curr:any) => {
+      return curr.symbol === this.symbol
+    })
+
+    if (curr) return `Amount: ${curr.shares}`
+    else return ``
+  }
 
   getStockData(){
     console.log(this.symbol)
@@ -69,15 +92,28 @@ export class TradeComponent implements OnInit {
     else {
       switch(this.actionType) {
         case "buy":
+          console.log(this.quantity)
+          console.log(this.currPrice)
           this.stockService.buyStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
             console.log(val)
             this._snackbar.open("Purchase successful!", undefined, {duration:2000})
+            this.updateStocksArr()
           }, (err) => {
             console.log(err)
             this._snackbar.open('Purchased failed oop', undefined, {duration:2000})
           })
           break;
         case "sell":
+          console.log(this.quantity)
+          console.log(this.currPrice)
+          this.stockService.sellStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
+            console.log(val)
+            this._snackbar.open("Selling successful!", undefined, {duration:2000})
+            this.updateStocksArr()
+          }, (err) => {
+            console.log(err)
+            this._snackbar.open('Selling failed oop', undefined, {duration:2000})
+          })
           break;
         default:
           this._snackbar.open('Please pick between sell and buy', undefined, {duration: 2000})

@@ -70,7 +70,7 @@ async function grabUserStocks(userId) {
       ]
     }
   };
-
+  // TODO fix here for 0 value stocks
   // create new array of user's updated stocks
   const newStocks = [];
   for (const stock of user.stocks) {
@@ -93,6 +93,7 @@ async function buyStocks(stockBuyingData, userId) {
 
   // deconstructs incoming buying data and calcs totalPrice
   const { amtSharesBuy, currentDay } = stockBuyingData;
+  // console.log(stockBuyingData);
   const totalPrice = amtSharesBuy * currentDay.value;
 
   const user = await findUser(userId);
@@ -112,8 +113,10 @@ async function buyStocks(stockBuyingData, userId) {
       shares: amtSharesBuy + stock.shares,
       value: currentDay.value
     };
+    // console.log(currentDay.value);
     const oldArr = user.stocks.filter((curr) => curr.symbol !== currentDay.symbol);
     newStockArr = [...oldArr, updateStock];
+    console.log(newStockArr);
   } else {
     // else add new stock if not
     const newStock = {
@@ -130,11 +133,10 @@ async function buyStocks(stockBuyingData, userId) {
     {
       stocks: newStockArr,
       prevValue: user.currValue,
-      buyingPower: user.currValue - totalPrice,
+      buyingPower: user.buyingPower - totalPrice,
       currValue: calcValue(newStockArr) + user.buyingPower
     }
   );
-  console.log(stock);
 
   return 'Success';
 }
@@ -143,6 +145,7 @@ async function sellStocks(stockSellingData, userId) {
   if (!stockSellingData) throw 'No stock selling data given';
   // deconstructs incoming buying data and calcs totalPrice
   const { amtSharesSell, currentDay } = stockSellingData;
+  console.log(stockSellingData);
   const totalPrice = amtSharesSell * currentDay.value;
 
   const user = await findUser(userId);
@@ -160,6 +163,8 @@ async function sellStocks(stockSellingData, userId) {
   const oldArr = user.stocks.filter((curr) => curr.symbol !== currentDay.symbol);
 
   let newStockArr = [...oldArr, updateStock];
+
+  console.log(newStockArr);
 
   await Users.updateOne(
     { id: userId },

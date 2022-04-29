@@ -21,7 +21,7 @@
       <div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>Ticker</mat-label>
-          <input matInput [(ngModel)]="symbol" />
+          <input matInput [(ngModel)]="symbol" [disabled]="!validStocksArr" />
         </mat-form-field>
         <button mat-stroked-button (click)="getStockData()">Check ticker</button>
       </div>
@@ -63,7 +63,10 @@
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
-      <button mat-stroked-button (click)="purchase()">Purchase</button>
+      <div style="display: flex; flex-direction: row">
+        <button mat-stroked-button (click)="purchase()">Purchase</button>
+        <p>{{ getHintText() }}</p>
+      </div>
     </mat-card>
   </div>
 </div>
