@@ -27,6 +27,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TradeComponent } from './trade/trade.component';
 import { CreditsComponent } from './credits/credits.component';
+import { GroupComponent } from './group/group.component';
+import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { MatTooltipModule } from "@angular/material/tooltip";
+import {IgxAvatarModule} from "igniteui-angular";
 
 @NgModule({
   declarations: [
@@ -38,7 +42,8 @@ import { CreditsComponent } from './credits/credits.component';
     HomeComponent,
     SettingsComponent,
     TradeComponent,
-    CreditsComponent
+    CreditsComponent,
+    GroupComponent
   ],
   imports: [
     MatButtonModule,
@@ -58,7 +63,10 @@ import { CreditsComponent } from './credits/credits.component';
     MatGridListModule,
     MatIconModule,
     MatCardModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    MatTooltipModule,
+    IgxAvatarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -66,4 +74,5 @@ import { CreditsComponent } from './credits/credits.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
