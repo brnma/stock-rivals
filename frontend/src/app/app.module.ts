@@ -17,7 +17,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from 'src/app/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from 'src/app/interceptors/error.interceptor';
 import { HomeComponent } from './home/home.component';
-<<<<<<< HEAD
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -47,18 +46,6 @@ import { CreditsComponent } from './credits/credits.component';
     MatSelectModule,
     BrowserModule,
     AppRoutingModule,
-=======
-import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { SettingsComponent } from './settings/settings.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-@NgModule({
-  declarations: [AppComponent, TestingComponent, LoginComponent, NavbarComponent, RegisterComponent, HomeComponent, SettingsComponent],
-  imports: [BrowserModule, AppRoutingModule,
->>>>>>> 1b633050d3cf35a5bb39b812f1a9cb450c2c25be
     RouterModule,
     FormsModule,
     NgxChartsModule,
@@ -68,7 +55,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     MatProgressSpinnerModule,
     HttpClientModule,
     MatSnackBarModule,
-<<<<<<< HEAD
     MatGridListModule,
     MatIconModule,
     MatCardModule,
@@ -78,11 +64,6 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
-=======
-    MatIconModule, MatSlideToggleModule
-  ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }],
->>>>>>> 1b633050d3cf35a5bb39b812f1a9cb450c2c25be
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,9 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { TradeComponent } from './trade/trade.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SettingsComponent} from './settings/settings.component';
 
-<<<<<<< HEAD
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
@@ -16,10 +14,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] }
 ];
-=======
-
-const routes: Routes = [{path:'', component:HomeComponent, canActivate:[AuthGuard]}, {path: 'login', component: LoginComponent}, {path:'register', component:RegisterComponent}, {path:'settings', component:SettingsComponent}];
->>>>>>> 1b633050d3cf35a5bb39b812f1a9cb450c2c25be
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
