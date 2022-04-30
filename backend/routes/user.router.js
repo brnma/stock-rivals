@@ -48,6 +48,8 @@ router.post('/uploadpic', upload.any('image'), async function (req, res, next) {
   } else res.status(400).json();
 });
 
+router.get('allusers', userController.getAllUsers);
+
 // for app to get latest user data after any changes
 router.get('/latestUser', userController.getLatestUser);
 

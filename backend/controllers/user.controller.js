@@ -1,6 +1,6 @@
 const userService = require('../services/user.service');
 
-module.exports = { register, authenticate, getLatestUser };
+module.exports = { register, authenticate, getLatestUser, getAllUsers };
 
 async function authenticate(req, res, next) {
   try {
@@ -26,6 +26,15 @@ async function getLatestUser(req, res, next) {
   try {
     const latest = await userService.getLatestUser(req.user.sub);
     res.json(latest);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+async function getAllUsers(req, res, next) {
+  try {
+    const users = await userService.getAllUsers();
+    res.json(users);
   } catch (error) {
     res.status(400).json(error);
   }

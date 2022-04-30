@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<h2 class="center">Group Ranking</h2>
+<div class="ranked-user-container">
+  <app-ranked-user class="" *ngFor="let rankedUser of users" [rankedUser]="rankedUser"></app-ranked-user>
+</div>
+
+<section>
+  <div class="example-button-row">
+    <button mat-button color="accent"><h2>Join Group</h2></button>
+  </div>
+</section>
+
+<!-- Add the navbar here
+<div class="ranked-user-container">
+  <app-ranked-user> class="" *ngFor="let rankedUser of Users" [rankUser]="rankUser"</app-ranked-user>
+
+</div>
+ Add the navbar here -->
