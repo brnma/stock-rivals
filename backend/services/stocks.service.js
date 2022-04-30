@@ -15,7 +15,8 @@ module.exports = {
   buyStocks,
   sellStocks,
   grabOneStockUser,
-  getHistoricalValue
+  getHistoricalValue,
+  findUser
 };
 
 // grab the specified stock's data for the past X days/months/years/...
@@ -133,8 +134,8 @@ async function buyStocks(stockBuyingData, userId) {
     {
       stocks: newStockArr,
       prevValue: user.currValue,
-      buyingPower: user.buyingPower - totalPrice,
-      currValue: calcValue(newStockArr) + user.buyingPower
+      buyingPower: (user.buyingPower - totalPrice).toFixed(2),
+      currValue: (calcValue(newStockArr) + user.buyingPower).toFixed(2)
     }
   );
 
@@ -171,8 +172,8 @@ async function sellStocks(stockSellingData, userId) {
     {
       stocks: newStockArr,
       prevValue: user.currValue,
-      buyingPower: totalPrice + user.buyingPower,
-      currValue: calcValue(newStockArr) + user.buyingPower
+      buyingPower: (totalPrice + user.buyingPower).toFixed(2),
+      currValue: (calcValue(newStockArr) + user.buyingPower).toFixed(2)
     }
   );
 
@@ -201,8 +202,6 @@ async function findUser(userId) {
   const user = await Users.findOne({ id: userId });
   if (!user) throw 'User not found';
 
-  // console.log(user);
-
   return user;
 }
 
@@ -218,7 +217,7 @@ function calcValue(stocks) {
 function updateHistoryValue() {
   let checked = {};
   Users.find({}).then((users) => {
-    const currDate = new Date();
+    const currDate = new Date().toISOString().split('T')[0];
     Promise.all(
       users.map(async (user) => {
         console.log(`${user.username} is updated`);
@@ -236,13 +235,25 @@ function updateHistoryValue() {
             total += checked[stock.symbol];
           }
         }
-        const history = new HistoryValue({
-          user: user.id,
-          value: total,
-          date: currDate
-        });
 
-        history.save().then();
+        if (await HistoryValue.findOne({ user: user.id, date: currDate })) {
+          await HistoryValue.findOneAndUpdate(
+            { user: user.id, date: currDate },
+            {
+              value: total
+            }
+          );
+        } else {
+          const history = new HistoryValue({
+            user: user.id,
+            value: total,
+            date: currDate
+          });
+
+          await history.save();
+        }
+        // might need to change
+        await user.update({ prevValue: user.currValue, currValue: history[0].value });
       })
     );
   });
@@ -256,11 +267,49 @@ function updateHistoryValue() {
 
 async function getHistoricalValue(userId) {
   const user = await findUser(userId);
-  console.log(user);
+  // console.log(user);
+  let total = 0;
+  const currDate = new Date().toISOString().split('T')[0];
+  console.log(currDate);
+
+  for (const stock of user.stocks) {
+    // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
+    // const response = await axios.get(api_url);
+    // const newValue = response.data.data[0].last;
+    const newValue = 20 * stock.shares;
+    total += newValue;
+  }
+
+  if (await HistoryValue.findOne({ user: user.id, date: currDate })) {
+    await HistoryValue.findOneAndUpdate(
+      { user: user.id, date: currDate },
+      {
+        value: total
+      }
+    );
+  } else {
+    const history = new HistoryValue({
+      user: user.id,
+      value: total,
+      date: currDate
+    });
+
+    await history.save();
+  }
+
   const history = await HistoryValue.find({ user: user.id });
   console.log(history);
-  return history.map((curr) => ({
-    value: curr.value,
-    date: curr.date
-  }));
+  // might need to change
+  await user.update({ prevValue: user.currValue, currValue: history[0].value });
+  return [
+    {
+      name: 'Your performance!',
+      series: history
+        .map((curr) => ({
+          value: curr.value,
+          name: curr.date
+        }))
+        .reverse()
+    }
+  ];
 }

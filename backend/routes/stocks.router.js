@@ -2,13 +2,13 @@ let express = require('express');
 var router = express.Router();
 const stocksController = require('../controllers/stocks.controller');
 
-// for home screen historical graph
+// for home screen historical graph TODO
 router.get('/getHistoricalValue', stocksController.grabHistoricalValue);
 
 // for trade screen
 router.get('/chartData/:symbol', stocksController.grabHistoricalData);
 
-// for home screen to display user stocks
+// for home screen to display user stocks TODO
 router.get('/getValues', stocksController.grabUserStocks);
 
 // for trade screen to purchase stocks

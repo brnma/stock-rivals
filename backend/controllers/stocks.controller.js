@@ -13,7 +13,7 @@ const axios = require('axios');
 // // for trade screen to sell stocks
 // router.post('/sell', stocksController.sellStocks());
 
-module.exports = { grabHistoricalData, grabUserStocks, buyStocks, sellStocks, grabHistoricalValue };
+module.exports = { grabHistoricalData, grabUserStocks, buyStocks, sellStocks, grabHistoricalValue, grabLatestUser };
 
 async function grabHistoricalData(req, res, next) {
   try {
@@ -106,8 +106,18 @@ async function sellStocks(req, res, next) {
 
 async function grabHistoricalValue(req, res, next) {
   try {
-    const data = await stockService.getHistoricalValue('6262d95b83aae28e839f4af4');
+    const data = await stockService.getHistoricalValue(req.user.sub);
     res.json(data);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+}
+
+async function grabLatestUser(req, res, next) {
+  try {
+    const user = await stockService.findUser(req.user.sub);
+    console.log(user);
+    res.json(user);
   } catch (error) {
     res.status(400).json(error);
   }

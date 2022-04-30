@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const DIR = path.join(__dirname + '/../public/imgs');
 const userController = require('../controllers/user.controller');
+const stocksController = require('../controllers/stocks.controller');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -38,6 +39,9 @@ router.post('/uploadpic', upload.any('image'), function (req, res, next) {
   if (req.files) res.json();
   else res.status(400).json();
 });
+
+// for app to get latest user data after any changes
+router.get('/latestUser', userController.getLatestUser);
 
 router.post('/login', userController.authenticate);
 

@@ -7,7 +7,8 @@ const groupsService = require('./groups.service');
 module.exports = {
   authenticate,
   getAllUsers,
-  register
+  register,
+  getLatestUser
 };
 
 // Esekia's implementation of authenticate and the rest
@@ -50,4 +51,14 @@ async function register(userParam) {
   await user.save();
 
   return user;
+}
+
+async function getLatestUser(userId) {
+  if (!userId) throw 'No user ID given';
+  const { prevValue, currValue, buyingPower } = await Users.findOne({ id: userId });
+  return {
+    prevValue: prevValue,
+    currValue: currValue,
+    buyingPower: buyingPower
+  };
 }
