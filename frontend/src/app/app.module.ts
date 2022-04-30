@@ -26,7 +26,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TradeComponent } from './trade/trade.component';
-import { CreditsComponent } from './credits/credits.component';
 import { RankingComponent } from './ranking/ranking.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
@@ -44,7 +43,6 @@ import { RankedUserComponent } from './ranked-user/ranked-user.component';
     HomeComponent,
     SettingsComponent,
     TradeComponent,
-    CreditsComponent,
     RankingComponent,
     RankedUserComponent,
   ],
