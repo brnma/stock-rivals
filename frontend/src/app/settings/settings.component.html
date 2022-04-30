@@ -14,15 +14,17 @@
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
   </p>
+  <h2 style="padding-top: 15px" class="center">Profile Picture</h2>
   <div class="center">
-    <h2 style="padding-top: 15px">Profile Picture</h2>
-    <div class="example-button-container">
-      <button mat-button color="warn">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
+    <input
+      id="img"
+      type="file"
+      accept="image/*"
+      (change)="changeProfilePic($event)"
+      style="border: 1px solid gray; border-radius: 24px; padding: 18px"
+    />
   </div>
   <div class="center">
-    <button mat-button color="warn">Sign Out</button>
+    <button mat-button color="warn" (click)="signOut()">Sign Out</button>
   </div>
 </section>
