@@ -10,10 +10,13 @@
   <p class="center">
     <mat-form-field appearance="outline">
       <mat-label>Change Screen Name</mat-label>
-      <input matInput placeholder="name" />
+      <input matInput placeholder="name" [(ngModel)]="currNewUsername" />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
     </mat-form-field>
   </p>
+  <div class="center">
+    <button mat-button color="primary" (click)="changeName()">Change username</button>
+  </div>
   <h2 style="padding-top: 15px" class="center">Profile Picture</h2>
   <div class="center">
     <input

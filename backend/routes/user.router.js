@@ -53,6 +53,8 @@ router.get('allusers', userController.getAllUsers);
 // for app to get latest user data after any changes
 router.get('/latestUser', userController.getLatestUser);
 
+router.post('/changeusername', userController.changeUsername);
+
 router.post('/login', userController.authenticate);
 
 router.post('/register', userController.register);

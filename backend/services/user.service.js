@@ -3,12 +3,16 @@ const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
 const Users = db.Users;
 const groupsService = require('./groups.service');
+const fs = require('fs');
+const path = require('path');
+const DIR = __dirname + '/../public/imgs';
 
 module.exports = {
   authenticate,
   getAllUsers,
   register,
-  getLatestUser
+  getLatestUser,
+  changeUsername
 };
 
 // Esekia's implementation of authenticate and the rest
@@ -63,4 +67,30 @@ async function getLatestUser(userId) {
     profileImage: profileImage,
     username: username
   };
+}
+
+async function changeUsername(newUsername, userId) {
+  if (!userId) throw 'No user ID given';
+
+  if (await Users.findOne({ username: newUsername })) throw 'Username already taken';
+
+  const user = await Users.findOne({ id: userId });
+
+  const oldUsername = user.username;
+  const fileType = user.profileImage.split('.')[1];
+
+  await Users.updateOne(
+    { id: userId },
+    {
+      username: newUsername,
+      profileImage: `${newUsername}.${fileType}`
+    }
+  );
+
+  const oldFile = path.join(`${DIR}/${oldUsername}.${fileType}`);
+  const newFile = path.join(`${DIR}/${newUsername}.${fileType}`);
+
+  console.log(oldFile);
+
+  fs.renameSync(oldFile, newFile);
 }

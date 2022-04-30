@@ -51,8 +51,8 @@ export class AuthService {
     return this.http.get<User>(`http://localhost:3000/user/latestUser`).pipe(map((user) => {
       return user
     })).subscribe(user => {
-      const {prevValue, currValue, buyingPower, profileImage} = user  
-      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower, profileImage:profileImage}
+      const {prevValue, currValue, buyingPower, profileImage, username} = user  
+      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower, profileImage:profileImage, username:username}
         // console.log(user)
         // console.log(this.getUserVal)
         localStorage.setItem('currentUser', JSON.stringify(updated));

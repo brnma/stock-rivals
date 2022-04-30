@@ -1,6 +1,6 @@
 const userService = require('../services/user.service');
 
-module.exports = { register, authenticate, getLatestUser, getAllUsers };
+module.exports = { register, authenticate, getLatestUser, getAllUsers, changeUsername };
 
 async function authenticate(req, res, next) {
   try {
@@ -37,5 +37,15 @@ async function getAllUsers(req, res, next) {
     res.json(users);
   } catch (error) {
     res.status(400).json(error);
+  }
+}
+
+async function changeUsername(req, res, next) {
+  try {
+    const { newUsername } = req.body;
+    await userService.changeUsername(newUsername, req.user.sub);
+    res.json();
+  } catch (e) {
+    res.status(400).json(e);
   }
 }

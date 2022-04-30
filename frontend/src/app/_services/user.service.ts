@@ -62,6 +62,12 @@ export class UserService {
   uploadPic(obj: any) {
     return this.http.post(`http://localhost:3000/user/uploadpic`, obj);
   }
+
+  changeUsername(newUsername:string) {
+    return this.http.post(`http://localhost:3000/user/changeusername`, {
+      newUsername: newUsername
+    })
+  }
   // getUsers() {
   //  return this.http.get(`http://localhost:3030/user/g`);
   //   // let temp:User[]= [this.user1, this.user2, this.user3, this.user4];
