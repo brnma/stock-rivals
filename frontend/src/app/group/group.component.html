@@ -1,25 +1,21 @@
 <app-navbar></app-navbar>
-<p>group works!</p>
-<mat-card class="chart-card">
-  <p class = "center"> </p>
-  <h3 class="center">Group Ranking</h3>
-    <div class="center">
-  <p>#1  <mat-icon>account_circle</mat-icon> John Smith <p>
+<h2 class="center">Group Ranking</h2>
+<div class="ranked-user-container">
+  <app-ranked-user class="" *ngFor="let rankedUser of Users;" [rankedUser]="rankedUser"></app-ranked-user>
 </div>
-  <div class="center">
-    <p>#2  <mat-icon>account_circle</mat-icon> John Smith <p>
-  </div>
-  <div class="center">
-    <p>#3  <mat-icon>account_circle</mat-icon> John Smith <p>
-  </div>
-  <div class="center">
-    <p>#4  <mat-icon>account_circle</mat-icon> John Smith <p>
-  </div>
-  <div class="center">
-    <p>#5  <mat-icon>account_circle</mat-icon> John Smith <p>
-  </div>
-  <button mat-button color="primary">Add group</button>
 
-</mat-card>
+<section>
+  <div class="example-button-row">
+    <button mat-button color="accent"><h2>Join Group</h2></button>
 
 
+  </div>
+</section>
+
+
+<!-- Add the navbar here
+<div class="ranked-user-container">
+  <app-ranked-user> class="" *ngFor="let rankedUser of Users" [rankUser]="rankUser"</app-ranked-user>
+
+</div>
+ Add the navbar here -->

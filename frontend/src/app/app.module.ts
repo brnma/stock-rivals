@@ -30,6 +30,8 @@ import { GroupComponent } from './group/group.component';
 import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import {IgxAvatarModule} from "igniteui-angular";
+import { RankedUserComponent } from './ranked-user/ranked-user.component';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import {IgxAvatarModule} from "igniteui-angular";
     HomeComponent,
     SettingsComponent,
     TradeComponent,
-    GroupComponent
+    GroupComponent,
+    RankedUserComponent,
   ],
   imports: [
     MatButtonModule,

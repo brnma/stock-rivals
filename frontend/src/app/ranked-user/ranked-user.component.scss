@@ -1,0 +1,43 @@
+
+$bg: rgb(165, 214, 167);
+$bgGrad: linear-gradient(90deg, rgba(165, 214, 167, 1) 0%, rgba(122, 186, 160, 1) 100%);
+.trading {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  height: 100vh;
+  padding-inline: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+.trade-card-container {
+  width: 50%;
+}
+.trade-card {
+  width: 100%;
+  height: 100%;
+}
+.form-field {
+  width: 95%;
+}
+button {
+  color: green;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ranked-user-card {
+  display: flex;
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+  margin-bottom: 0.275rem;
+}
+
+h3:hover {
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: scaleX(1.05);
+  color: $bg;
+  transition-duration: 1s;
+}

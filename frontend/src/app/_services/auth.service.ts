@@ -10,7 +10,8 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser!: Observable<User>;
 
-  private emptyUser: User = { username: '', name: '', profileImage: undefined, email: '' };
+  private emptyUser: User = { username: '', name: '', profileImage: undefined, email: '', accountValue: 0, rank: 0,
+    previousValue: 0 };
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
