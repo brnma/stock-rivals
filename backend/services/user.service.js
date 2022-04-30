@@ -55,10 +55,12 @@ async function register(userParam) {
 
 async function getLatestUser(userId) {
   if (!userId) throw 'No user ID given';
-  const { prevValue, currValue, buyingPower } = await Users.findOne({ id: userId });
+  const { prevValue, currValue, buyingPower, profileImage, username } = await Users.findOne({ id: userId });
   return {
     prevValue: prevValue,
     currValue: currValue,
-    buyingPower: buyingPower
+    buyingPower: buyingPower,
+    profileImage: profileImage,
+    username: username
   };
 }

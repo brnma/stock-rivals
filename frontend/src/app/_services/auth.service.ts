@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Route, Router, RouterStateSnapshot } from '@angular/router';
 import { User } from '../_models/user';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -12,7 +12,7 @@ export class AuthService {
 
   private emptyUser: User = { username: '', profileImage: undefined, email: '' , groupCode: null, buyingPower: 50000, prevValue: 0, currValue: 0};
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router:Router) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') ?? JSON.stringify(this.emptyUser))
     );
@@ -51,8 +51,8 @@ export class AuthService {
     return this.http.get<User>(`http://localhost:3000/user/latestUser`).pipe(map((user) => {
       return user
     })).subscribe(user => {
-      const {prevValue, currValue, buyingPower} = user  
-      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower}
+      const {prevValue, currValue, buyingPower, profileImage} = user  
+      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower, profileImage:profileImage}
         // console.log(user)
         // console.log(this.getUserVal)
         localStorage.setItem('currentUser', JSON.stringify(updated));
@@ -64,5 +64,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next({} as User);
+    window.location.reload()
   }
 }
