@@ -24,7 +24,9 @@ async function register(req, res, next) {
 
 async function getLatestUser(req, res, next) {
   try {
+    console.log(req.user.sub);
     const latest = await userService.getLatestUser(req.user.sub);
+
     res.json(latest);
   } catch (error) {
     res.status(400).json(error);

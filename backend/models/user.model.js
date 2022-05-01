@@ -6,7 +6,8 @@ const schema = new Schema({
   username: { type: String, unique: true, required: true },
   profileImage: {
     type: String,
-    required: false
+    required: true,
+    unique: true
   },
   hash: { type: String, required: true },
   email: { type: String, required: true },

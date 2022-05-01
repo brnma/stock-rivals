@@ -37,6 +37,11 @@ const upload = multer({
 });
 
 router.post('/uploadpic', upload.any('image'), async function (req, res, next) {
+  // console.log(req.user);
+  console.log(req.user);
+  console.log(req.files[0].originalname);
+
+  // BUGGY
   if (req.files[0]) {
     await Users.updateOne(
       { id: req.user.sub },
@@ -48,7 +53,7 @@ router.post('/uploadpic', upload.any('image'), async function (req, res, next) {
   } else res.status(400).json();
 });
 
-router.get('allusers', userController.getAllUsers);
+router.get('/allusers', userController.getAllUsers);
 
 // for app to get latest user data after any changes
 router.get('/latestUser', userController.getLatestUser);

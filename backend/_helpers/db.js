@@ -1,6 +1,8 @@
 // Setting up mongoose with models we need
 const mongoose = require('mongoose');
 
+mongoose.set('debug', true);
+
 // Mongoose and Mongo setup
 mongoose.connect(process.env.MONGODB_URI || process.env.CONNECTIONSTRING, {});
 

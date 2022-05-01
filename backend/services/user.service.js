@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../_helpers/db');
-const Users = db.Users;
+
 const groupsService = require('./groups.service');
 const fs = require('fs');
 const path = require('path');
 const DIR = __dirname + '/../public/imgs';
+const Users = db.Users;
 
 module.exports = {
   authenticate,
@@ -35,6 +36,7 @@ async function getAllUsers() {
 }
 
 async function register(userParam) {
+  console.log(userParam);
   // validate
   if (await Users.findOne({ username: userParam.username })) {
     throw 'Username "' + userParam.username + '" is already taken';
@@ -54,12 +56,17 @@ async function register(userParam) {
   // save user
   await user.save();
 
+  // console.log(user);
+
   return user;
 }
 
 async function getLatestUser(userId) {
   if (!userId) throw 'No user ID given';
-  const { prevValue, currValue, buyingPower, profileImage, username } = await Users.findOne({ id: userId });
+  console.log(userId);
+  const user = await Users.findOne({ _id: userId });
+  const { prevValue, currValue, buyingPower, profileImage, username } = user;
+  console.log(user);
   return {
     prevValue: prevValue,
     currValue: currValue,
@@ -74,13 +81,14 @@ async function changeUsername(newUsername, userId) {
 
   if (await Users.findOne({ username: newUsername })) throw 'Username already taken';
 
-  const user = await Users.findOne({ id: userId });
+  const user = await Users.findOne({ _id: userId });
 
+  console.log('changeUsername happened');
   const oldUsername = user.username;
   const fileType = user.profileImage.split('.')[1];
 
   await Users.updateOne(
-    { id: userId },
+    { _id: userId },
     {
       username: newUsername,
       profileImage: `${newUsername}.${fileType}`

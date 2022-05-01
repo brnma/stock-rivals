@@ -10,7 +10,7 @@ module.exports = {
 
 async function joinGroup(userId, code) {
   let user = await Users.findOne({ _id: userId });
-  console.log(user);
+  // console.log(user);
   await user.updateOne({ groupCode: code });
   return 'joined group successfully';
 }

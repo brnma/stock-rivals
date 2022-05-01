@@ -1,0 +1,38 @@
+OPTIONS /user/register 204 0.328 ms - 0
+{
+  email: 'mail2@mail.com',
+  username: 'smith',
+  password: '123123',
+  profileImage: 'smith.jpeg',
+  groupCode: null,
+  prevValue: 0,
+  currValue: 0,
+  buyingPower: 50000
+}
+Mongoose: users.findOne({ username: 'smith' }, { projection: {} })
+Mongoose: users.findOne({ email: 'mail2@mail.com' }, { projection: {} })
+Mongoose: users.findOne({ groupCode: 'PYQWMP' }, { projection: {} })
+Mongoose: users.insertOne({ username: 'smith', profileImage: 'smith.jpeg', email: 'mail2@mail.com', stocks: [], prevValue: 0, buyingPower: 50000, currValue: 0, groupCode: 'PYQWMP', _id: new ObjectId("626efc59073caba297b9df93"), hash: '$2a$10$rs17ecCjRp4AVpuJKxBLm.Yz1XQA.8w.WY8S3Q6RJVkyW4Et0sMie', __v: 0}, { session: null })POST /user/register 200 226.791 ms - -
+OPTIONS /user/login 204 0.450 ms - 0
+Mongoose: users.findOne({ username: 'smith' }, { projection: {} })
+POST /user/login 200 201.880 ms - 355
+OPTIONS /user/uploadpic 204 0.470 ms - 0
+Mongoose: users.findOne({ _id: new ObjectId("626efc59073caba297b9df93") }, { projection: {} })
+C:\Users\University Libraries\Desktop\project-stock-rivals\backend\public\imgs
+smith.jpeg
+Mongoose: users.updateOne({}, { '$set': { profileImage: 'smith.jpeg' } }, {})
+POST /user/uploadpic 200 37.374 ms - -
+OPTIONS /stocks/getHistoricalValue 204 0.348 ms - 0
+Mongoose: users.findOne({ _id: new ObjectId("626efc59073caba297b9df93") }, { projection: {} })
+at helper function findUser
+Mongoose: users.findOne({}, { projection: {} })
+Mongoose: historyvalues.findOne({ user: new ObjectId("626efc1b073caba297b9df80"), date: new Date("Sun, 01 May 2022 00:00:00 GMT")}, { projection: {} })
+Mongoose: historyvalues.findOneAndUpdate({ user: new ObjectId("626efc1b073caba297b9df80"), date: new Date("Sun, 01 May 2022 00:00:00 GMT")}, { '$set': { value: 0 } }, { upsert: false, projection: {}, returnDocument: 'before', returnOriginal: true})
+Mongoose: historyvalues.find({ user: new ObjectId("626efc1b073caba297b9df80") }, { projection: {} })
+Mongoose: users.update({ _id: new ObjectId("626efc1b073caba297b9df80") }, { '$set': { currValue: 0, prevValue: 0 } }, {})
+GET /stocks/getHistoricalValue 304 27.051 ms - -
+OPTIONS /user/latestUser 204 0.322 ms - 0
+Mongoose: users.findOne({ _id: new ObjectId("626efc59073caba297b9df93") }, { projection: {} })
+Mongoose: users.findOne({}, { projection: {} })
+GET /img/smith.jpeg 200 1.678 ms - 2102479
+GET /user/latestUser 200 11.178 ms - 95

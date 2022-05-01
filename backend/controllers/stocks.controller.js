@@ -26,7 +26,7 @@ async function grabHistoricalData(req, res, next) {
 
 async function grabUserStocks(req, res, next) {
   try {
-    const data = await stockService.grabUserStocks('62622b8a5e0a97f074405815'); //req.user.sub);
+    const data = await stockService.grabUserStocks(req.user.sub); //req.user.sub);
     res.json(data);
   } catch (error) {
     res.status(400).json(error);
@@ -41,7 +41,7 @@ async function buyStocks(req, res, next) {
     const { amtShares, value, symbol } = req.body;
     // console.log(req.body);
 
-    console.log(req.user);
+    // console.log(req.user);
 
     // const symbol = 'AAPL';
     // const amtShares = 9;
@@ -116,7 +116,7 @@ async function grabHistoricalValue(req, res, next) {
 async function grabLatestUser(req, res, next) {
   try {
     const user = await stockService.findUser(req.user.sub);
-    console.log(user);
+    // console.log(user);
     res.json(user);
   } catch (error) {
     res.status(400).json(error);

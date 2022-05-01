@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthService, private user: UserService, private stockService: StockService, private snackBar:MatSnackBar) {
     this.auth.getUserSubject.subscribe((val:any)=>{
       this.currUser = val
+      console.log(this.currUser)
     })
     // 👇this api is exposed to use for public images
     // this.currUser.profileImage = `http://localhost:3000/imgs/${this.currUser.profileImage}`;

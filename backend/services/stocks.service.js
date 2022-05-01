@@ -47,7 +47,7 @@ async function grabHistoricalData(symbol) {
   response.data = response.data.reverse();
 
   response.data.forEach((item) => {
-    console.log(item);
+    // console.log(item);
     data.series.push({
       value: item.last === null ? item.open : item.last,
       name: item.date.split('T')[0]
@@ -82,7 +82,7 @@ async function grabUserStocks(userId) {
     const newValue = response.data.data[0].last === null ? response.data.data[0].open : response.data.data[0].last;
     newStocks.push({ ...stock, value: newValue });
   }
-  console.log(newStocks);
+  // console.log(newStocks);
   await user.updateOne({ stocks: newStocks });
   await user.updateOne({ prevValue: user.currValue });
   await user.updateOne({ currValue: calcValue(newStocks) });
@@ -117,7 +117,7 @@ async function buyStocks(stockBuyingData, userId) {
     // console.log(currentDay.value);
     const oldArr = user.stocks.filter((curr) => curr.symbol !== currentDay.symbol);
     newStockArr = [...oldArr, updateStock];
-    console.log(newStockArr);
+    // console.log(newStockArr);
   } else {
     // else add new stock if not
     const newStock = {
@@ -130,7 +130,7 @@ async function buyStocks(stockBuyingData, userId) {
   }
 
   await Users.updateOne(
-    { id: userId },
+    { _id: userId },
     {
       stocks: newStockArr,
       prevValue: user.currValue,
@@ -146,7 +146,7 @@ async function sellStocks(stockSellingData, userId) {
   if (!stockSellingData) throw 'No stock selling data given';
   // deconstructs incoming buying data and calcs totalPrice
   const { amtSharesSell, currentDay } = stockSellingData;
-  console.log(stockSellingData);
+  // console.log(stockSellingData);
   const totalPrice = amtSharesSell * currentDay.value;
 
   const user = await findUser(userId);
@@ -165,10 +165,10 @@ async function sellStocks(stockSellingData, userId) {
 
   let newStockArr = [...oldArr, updateStock];
 
-  console.log(newStockArr);
+  // console.log(newStockArr);
 
   await Users.updateOne(
-    { id: userId },
+    { _id: userId },
     {
       stocks: newStockArr,
       prevValue: user.currValue,
@@ -199,7 +199,7 @@ async function findUser(userId) {
 
   console.log('at helper function findUser');
 
-  const user = await Users.findOne({ id: userId });
+  const user = await Users.findOne({ _id: userId }).select('-hash');
   if (!user) throw 'User not found';
 
   return user;
@@ -220,7 +220,7 @@ function updateHistoryValue() {
     const currDate = new Date().toISOString().split('T')[0];
     Promise.all(
       users.map(async (user) => {
-        console.log(`${user.username} is updated`);
+        // console.log(`${user.username} is updated`);
 
         let total = 0;
         for (const stock of user.stocks) {
@@ -265,12 +265,13 @@ function updateHistoryValue() {
 // to test every minute
 // cron.schedule('* * * * *', updateHistoryValue);
 
+// BUGGY AHHHHHHH
 async function getHistoricalValue(userId) {
   const user = await findUser(userId);
   // console.log(user);
   let total = 0;
   const currDate = new Date().toISOString().split('T')[0];
-  console.log(currDate);
+  // console.log(currDate);
 
   for (const stock of user.stocks) {
     // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
@@ -298,7 +299,7 @@ async function getHistoricalValue(userId) {
   }
 
   const history = await HistoryValue.find({ user: user.id });
-  console.log(history);
+  // console.log(history);
   // might need to change
   await user.update({ prevValue: user.currValue, currValue: history[0].value });
   return [
