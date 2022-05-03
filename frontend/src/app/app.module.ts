@@ -27,11 +27,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { TradeComponent } from './trade/trade.component';
 import { RankingComponent } from './ranking/ranking.component';
-import { MatProgressBarModule } from "@angular/material/progress-bar";
-import { MatTooltipModule } from "@angular/material/tooltip";
-import {IgxAvatarModule} from "igniteui-angular";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { IgxAvatarModule } from 'igniteui-angular';
 import { RankedUserComponent } from './ranked-user/ranked-user.component';
-
+import { GroupComponent } from './group/group.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +45,7 @@ import { RankedUserComponent } from './ranked-user/ranked-user.component';
     TradeComponent,
     RankingComponent,
     RankedUserComponent,
+    GroupComponent
   ],
   imports: [
     MatButtonModule,
@@ -75,5 +76,4 @@ import { RankedUserComponent } from './ranked-user/ranked-user.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}
