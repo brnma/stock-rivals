@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+
+<section class="flex-center">
+  <button mat-button color="accent" (click)="leaveGroup()"><h2>Leave Group</h2></button>
+
+  <button mat-button color="accent" (click)="joinGroup()"><h2>Join Group</h2></button>
+
+  <button mat-button color="accent" (click)="createGroup()"><h2>Create Group</h2></button>
+</section>
+
+<section class="flex-center">
+  <mat-form-field appearance="outline">
+    <mat-label>Group Code</mat-label>
+    <input *ngIf="inGroup" matInput placeholder="Ex. ABC123" [(ngModel)]="groupCode" readonly />
+    <input *ngIf="!inGroup" matInput placeholder="Ex. ABC123" [(ngModel)]="groupCode" />
+  </mat-form-field>
+</section>
