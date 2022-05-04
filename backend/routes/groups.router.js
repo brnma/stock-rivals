@@ -3,12 +3,15 @@ var router = express.Router();
 const groupsController = require('../controllers/groups.controller');
 
 // join group
-router.post('/join/:group', groupsController.joinGroup);
+router.post('/join', groupsController.joinGroup);
 
 // leave group
-router.post('/leave/:group', groupsController.leaveGroup);
+router.post('/leave', groupsController.leaveGroup);
 
-// create group?
+// create group
 router.get('/create', groupsController.createGroup);
+// create group
+
+router.get('/getGroup', groupsController.getGroup);
 
 module.exports = router;

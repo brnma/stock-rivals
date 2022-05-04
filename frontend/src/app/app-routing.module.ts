@@ -6,15 +6,17 @@ import { LoginComponent } from './login/login.component';
 import { TradeComponent } from './trade/trade.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {RankingComponent} from './ranking/ranking.component';
+import { RankingComponent } from './ranking/ranking.component';
+import { GroupComponent } from './group/group.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate:[AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'trade', component: TradeComponent, canActivate:[AuthGuard] },
+  { path: 'trade', component: TradeComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] },
-  {path: 'ranking', component: RankingComponent, canActivate:[AuthGuard]}
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'ranking', component: RankingComponent, canActivate: [AuthGuard] },
+  { path: 'group', component: GroupComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

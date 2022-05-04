@@ -44,7 +44,7 @@ router.post('/uploadpic', upload.any('image'), async function (req, res, next) {
   // BUGGY
   if (req.files[0]) {
     await Users.updateOne(
-      { id: req.user.sub },
+      { _id: req.user.sub },
       {
         profileImage: req.files[0].originalname
       }
