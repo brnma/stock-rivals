@@ -28,6 +28,8 @@ async function authenticate({ username, password }) {
       token
     };
   }
+
+  throw "Incorrect password"
 }
 
 async function getAllUsers() {

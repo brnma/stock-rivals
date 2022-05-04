@@ -119,6 +119,27 @@ async function grabHistoricalValue(req, res, next) {
 
 async function grabLatestUser(req, res, next) {
   try {
+//     const usertemp = await User.findOne({ _id: req.user.sub });
+// for (let i = 0; i < 365; i++) {
+//   let date_to = new Date();
+//   //date to is a year ago
+//   date_to.setDate(date_to.getDate() - i);
+//   // change date to a string in YYYY-MM-DD format
+//   date_to = date_to.toISOString().slice(0, 10);
+//   // randomed.push({
+//   //   user: { $oid: '6271ed2d5cc075aed4f696a4' },
+//   //   value: Math.random() * 10000,
+//   //   date: {
+//   //     $date: new Date(date_to)
+//   //   }
+//   // });
+//   const temp = await HistoryValue.create({
+//     user: usertemp,
+//     value: Math.random() * 10000,
+//     date: new Date(date_to)
+//   });
+//   await temp.save();
+// }
     const user = await stockService.findUser(req.user.sub);
     // console.log(user);
     res.json(user);

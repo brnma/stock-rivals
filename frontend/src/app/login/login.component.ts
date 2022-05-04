@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       () => {
-        this._snackbar.open('Ooop error login', 'Error');
+        this._snackbar.open('Ooop error login; wrong credentials', 'Error');
       }
     );
   }

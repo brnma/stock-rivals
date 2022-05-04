@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
           console.log("wtff????")
         })
       }, (err) => {
-        this._snackbar.open(err, "Error", {
+        this._snackbar.open("Username and or email already taken", "Error", {
           duration: 3000
         })
         this.submitted = false
