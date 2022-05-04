@@ -39,8 +39,10 @@ async function grabHistoricalData(symbol) {
   // get data from api
   const api_url = `https://api.marketstack.com/v1/intraday?access_key=${
     process.env.MARKETKEY
-  }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}&interval=1min`;
+  }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}`;
+  console.log(api_url);
   let response = await axios.get(api_url);
+  console.log(response.data.data);
   // console.log(response.data);
   // response.data.data.forEach((item) => {
   // const response = TSLAdata; //!sandbox
@@ -83,7 +85,7 @@ async function grabUserStocks(userId) {
   const newStocks = [];
   for (const stock of user.stocks) {
     //* api call with the current symbol
-    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}&interval=1min`;
+    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
     const response = await axios.get(api_url);
     //* if stock market is closed then set newvalue to open price of stock
     const newValue = response.data.data[0].last === null ? response.data.data[0].open : response.data.data[0].last;
@@ -98,6 +100,7 @@ async function grabUserStocks(userId) {
 
 async function buyStocks(stockBuyingData, userId) {
   if (!stockBuyingData) throw 'No stock data given';
+  console.log('here');
 
   // deconstructs incoming buying data and calcs totalPrice
   const { amtSharesBuy, currentDay } = stockBuyingData;
@@ -283,7 +286,7 @@ async function getHistoricalValue(userId) {
   // console.log(currDate);
 
   for (const stock of user.stocks) {
-    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}&interval=1min`;
+    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
     const response = await axios.get(api_url);
     const newValue = response.data.data[0].last * stock.shares;
     // const newValue = 20 * stock.shares;

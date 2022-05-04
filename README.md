@@ -1,17 +1,14 @@
 # Stock Rivals Project for 3754
 
-## Angular
+2 Folders
 
-In the project directory, you can run:
+* frontend
+* backend
 
-`ng serve`
+In frontend, run 
 
-If you want the app to open in a tab:
+`npm install` then `npm start` to run dev server
 
-`ng serve --open`
+In backend, run
 
-## Express
-
-In the project directory, to start the app using **nodemon**:
-
-`npm start`
+`npm install`, run mongod with `sudo mongod` then `npm start`

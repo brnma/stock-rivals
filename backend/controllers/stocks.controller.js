@@ -49,7 +49,7 @@ async function buyStocks(req, res, next) {
     // const symbol = 'AAPL';
     // const amtShares = 9;
     const currentDay = await axios.get(
-      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}&interval=1min`
+      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
     );
     console.log(currentDay.data.data);
     const stockBuyingData = {
@@ -83,7 +83,7 @@ async function sellStocks(req, res, next) {
     // const symbol = "AAPL"
     // const amtShares = 9
     const currentDay = await axios.get(
-      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}&interval=1min`
+      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
     );
     console.log(currentDay.data.data);
     const stockSellingData = {
