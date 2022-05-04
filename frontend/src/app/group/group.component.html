@@ -15,3 +15,8 @@
     <input *ngIf="!inGroup" matInput placeholder="Ex. ABC123" [(ngModel)]="groupCode" />
   </mat-form-field>
 </section>
+
+<h2 class="flex-center">Group Rankings</h2>
+<div class="ranked-user-container">
+  <app-ranked-user *ngFor="let rankedUser of users" [rankedUser]="rankedUser"></app-ranked-user>
+</div>

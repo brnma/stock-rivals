@@ -21,4 +21,7 @@ export class GroupService {
   getGroup() {
     return this.http.get(`http://localhost:3000/groups/getGroup`);
   }
+  getGroupUsers() {
+    return this.http.get(`http://localhost:3000/groups/getGroupUsers`);
+  }
 }

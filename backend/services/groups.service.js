@@ -6,7 +6,8 @@ module.exports = {
   leaveGroup,
   createGroup,
   generateGroupCode,
-  getGroup
+  getGroup,
+  getGroupUsers
 };
 
 async function joinGroup(userId, code) {
@@ -36,6 +37,12 @@ async function getGroup(userId) {
   let user = await Users.findOne({ _id: userId });
   const code = await user.groupCode;
   return code == null ? '' : code;
+}
+
+async function getGroupUsers(userId) {
+  let user = await Users.findOne({ _id: userId });
+  const users = await Users.find({ groupCode: user.groupCode });
+  return user.groupCode == null ? [] : users;
 }
 
 async function generateGroupCode() {
