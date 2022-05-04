@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     cb(null, DIR);
   },
   filename: (req, file, cb) => {
-    const newFileName = file.originalname.toLowerCase().split(' ').join('-');
+    const newFileName = file.originalname.split(' ').join('-');
     console.log(newFileName);
     cb(null, newFileName);
   }
