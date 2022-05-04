@@ -37,17 +37,24 @@ async function grabHistoricalData(symbol) {
   date_from = date_from.toISOString().slice(0, 10);
 
   // get data from api
-  // const api_url = `https://api.marketstack.com/v1/intraday?access_key=${
-  //   process.env.MARKETKEY
-  // }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}`;
-  // const response = await axios.get(api_url);
+  const api_url = `https://api.marketstack.com/v1/intraday?access_key=${
+    process.env.MARKETKEY
+  }&symbols=${symbol}&date_from=${date_from}&date_to=${date_to}&limit=${365}&interval=1min`;
+  let response = await axios.get(api_url);
+  // console.log(response.data);
   // response.data.data.forEach((item) => {
-  const response = TSLAdata; //!sandbox
+  // const response = TSLAdata; //!sandbox
 
-  response.data = response.data.reverse();
+  // fixed bug here; reverse() returns void
+
+  // console.log(response.data.data.reverse());
+
+  response.data = response.data.data.reverse();
+
+  // console.log(response.data);
 
   response.data.forEach((item) => {
-    // console.log(item);
+    console.log(item);
     data.series.push({
       value: item.last === null ? item.open : item.last,
       name: item.date.split('T')[0]
@@ -60,24 +67,24 @@ async function grabHistoricalData(symbol) {
 // get latest data for each stock in user's portfolio
 async function grabUserStocks(userId) {
   let user = await findUser(userId);
-  let response = {
-    data: {
-      data: [
-        {
-          open: 169.11,
-          last: 1,
-          close: 167.23
-        }
-      ]
-    }
-  };
+  // let response = {
+  //   data: {
+  //     data: [
+  //       {
+  //         open: 169.11,
+  //         last: 1,
+  //         close: 167.23
+  //       }
+  //     ]
+  //   }
+  // };
   // TODO fix here for 0 value stocks
   // create new array of user's updated stocks
   const newStocks = [];
   for (const stock of user.stocks) {
     //* api call with the current symbol
-    // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
-    // const response = await axios.get(api_url);
+    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}&interval=1min`;
+    const response = await axios.get(api_url);
     //* if stock market is closed then set newvalue to open price of stock
     const newValue = response.data.data[0].last === null ? response.data.data[0].open : response.data.data[0].last;
     newStocks.push({ ...stock, value: newValue });
@@ -155,6 +162,7 @@ async function sellStocks(stockSellingData, userId) {
   // checks to see if user already has the stock or not
   const stock = user.stocks.find((curr) => curr.symbol === currentDay.symbol);
   if (!stock) throw 'Stock not found on user';
+  if (stock.shares < amtSharesSell) throw 'User does not have enough shares';
   // updates existing stock
   const updateStock = {
     ...stock,
@@ -208,7 +216,7 @@ async function findUser(userId) {
 function calcValue(stocks) {
   let value = 0;
   stocks.forEach((stock) => {
-    console.log(stocks)
+    console.log(stocks);
     value += stock.shares * stock.value;
   });
   return value;
@@ -226,10 +234,10 @@ function updateHistoryValue() {
         let total = 0;
         for (const stock of user.stocks) {
           if (!checked[stock.symbol]) {
-            // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
-            // const response = await axios.get(api_url);
-            // const newValue = response.data.data[0].last;
-            const newValue = 20;
+            const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
+            const response = await axios.get(api_url);
+            const newValue = response.data.data[0].last;
+            // const newValue = 20;
             checked[stock.symbol] = newValue;
             total += newValue;
           } else {
@@ -275,10 +283,10 @@ async function getHistoricalValue(userId) {
   // console.log(currDate);
 
   for (const stock of user.stocks) {
-    // const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}`;
-    // const response = await axios.get(api_url);
-    // const newValue = response.data.data[0].last;
-    const newValue = 20 * stock.shares;
+    const api_url = `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${stock.symbol}&interval=1min`;
+    const response = await axios.get(api_url);
+    const newValue = response.data.data[0].last * stock.shares;
+    // const newValue = 20 * stock.shares;
     total += newValue;
   }
 
@@ -300,8 +308,10 @@ async function getHistoricalValue(userId) {
   }
 
   const history = await HistoryValue.find({ user: user.id });
-  // console.log(history);
+
   // might need to change
+  console.log('before');
+  console.log(user);
   await user.update({ prevValue: user.currValue, currValue: history[0].value });
   return [
     {

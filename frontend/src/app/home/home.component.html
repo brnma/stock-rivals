@@ -25,13 +25,13 @@
       <mat-grid-tile class="current-value">
         <div class="display-user-values">
           Investing:
-          <h1 class="positive">${{ currUser.currValue }}</h1>
+          <h1 class="positive">${{ currUser.currValue | number: '1.2-2' }}</h1>
         </div>
       </mat-grid-tile>
 
       <mat-grid-tile class="daily-change">
         <div class="display-user-values">
-          Today's Change:
+          Last refresh:
           <div class="flex-center">
             <h1 class="positive" *ngIf="currChange > 1">{{ currChange - 1.0 | percent }}</h1>
             <h1 class="negative" *ngIf="currChange < 1">{{ 1.0 - currChange | percent }}</h1>
@@ -49,5 +49,12 @@
       <h2 class="buying-power">${{ currUser.buyingPower }}</h2>
       <button mat-stroked-button (click)="grabHistoricalValue()">Refresh</button>
     </div>
+    <!-- <div
+      style="display: flex; align-items: center; text-align: center; justify-content: center; flex-direction: column"
+    >
+      <div *ngFor="let stock of stocks; index as i">
+        <h2>{{ i }}:{{ stock.symbol }}</h2>
+      </div>
+    </div> -->
   </mat-card>
 </div>

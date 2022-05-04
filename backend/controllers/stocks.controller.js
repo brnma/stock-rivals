@@ -1,5 +1,8 @@
 const stockService = require('../services/stocks.service');
 const axios = require('axios');
+const db = require('../_helpers/db');
+const User = db.Users;
+const HistoryValue = db.HistoryValue;
 
 // // for trade screen
 // router.get('/:symbol', stocksController.grabHistoricalData());
@@ -45,24 +48,25 @@ async function buyStocks(req, res, next) {
 
     // const symbol = 'AAPL';
     // const amtShares = 9;
-    // const currentDay = await axios.get(
-    //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
-    // );
-    // console.log(currentDay.data.data);
-    // const stockBuyingData = {
-    //   amtSharesBuy: amtShares,
-    //   currentDay: {
-    //     symbol: symbol,
-    //     value: currentDay.data.data.close
-    //   }
-    // };
+    const currentDay = await axios.get(
+      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}&interval=1min`
+    );
+    console.log(currentDay.data.data);
     const stockBuyingData = {
       amtSharesBuy: amtShares,
       currentDay: {
         symbol: symbol,
-        value: value
+        value: currentDay.data.data[0].last === null ? currentDay.data.data[0].open : currentDay.data.data[0].last
       }
     };
+    console.log(stockBuyingData);
+    // const stockBuyingData = {
+    //   amtSharesBuy: amtShares,
+    //   currentDay: {
+    //     symbol: symbol,
+    //     value: value
+    //   }
+    // };
 
     const success = await stockService.buyStocks(stockBuyingData, req.user.sub);
     res.json(success);
@@ -78,24 +82,24 @@ async function sellStocks(req, res, next) {
     const { amtShares, value, symbol } = req.body;
     // const symbol = "AAPL"
     // const amtShares = 9
-    // const currentDay = await axios.get(
-    //   `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}`
-    // );
-    // console.log(currentDay.data.data);
-    // const stockBuyingData = {
-    //   amtSharesSell: amtShares,
-    //   currentDay: {
-    //     symbol: share,
-    //     value: currentDay.data.data.close
-    //   }
-    // };
+    const currentDay = await axios.get(
+      `https://api.marketstack.com/v1/intraday/latest?access_key=${process.env.MARKETKEY}&symbols=${symbol}&interval=1min`
+    );
+    console.log(currentDay.data.data);
     const stockSellingData = {
       amtSharesSell: amtShares,
       currentDay: {
         symbol: symbol,
-        value: value
+        value: currentDay.data.data[0].last === null ? currentDay.data.data[0].open : currentDay.data.data[0].last
       }
     };
+    // const stockSellingData = {
+    //   amtSharesSell: amtShares,
+    //   currentDay: {
+    //     symbol: symbol,
+    //     value: value
+    //   }
+    // };
 
     const success = await stockService.sellStocks(stockSellingData, req.user.sub);
     res.json(success);
@@ -123,6 +127,29 @@ async function grabLatestUser(req, res, next) {
   }
 }
 
+// fgenerate fake historical data
+// const user = await User.findOne({ _id: req.user.sub });
+// for (let i = 0; i < 365; i++) {
+//   let date_to = new Date();
+//   //date to is a year ago
+//   date_to.setDate(date_to.getDate() - i);
+//   // change date to a string in YYYY-MM-DD format
+//   date_to = date_to.toISOString().slice(0, 10);
+//   // randomed.push({
+//   //   user: { $oid: '6271ed2d5cc075aed4f696a4' },
+//   //   value: Math.random() * 10000,
+//   //   date: {
+//   //     $date: new Date(date_to)
+//   //   }
+//   // });
+//   const temp = await HistoryValue.create({
+//     user: user,
+//     value: Math.random() * 10000,
+//     date: new Date(date_to)
+//   });
+//   await temp.save();
+// }
+
 // db.users.insert({
 //   username: 'dark7storm',
 //   profileImage: 'dark7storm.jpeg',
@@ -144,3 +171,21 @@ async function grabLatestUser(req, res, next) {
 //   buyingPower: 1000,
 //   currValue: 1000
 // });
+
+// db.historyvalues.insertMany([
+//   {
+//     user: ObjectId('6271ed2d5cc075aed4f696a4'),
+//     value: 992,
+//     date: new Date('2022-04-26T00:01:00.464Z')
+//   },
+//   {
+//     user: ObjectId('6271ed2d5cc075aed4f696a4'),
+//     value: 992,
+//     date: new Date('2022-04-25T00:01:00.464Z')
+//   },
+//   {
+//     user: ObjectId('6271ed2d5cc075aed4f696a4'),
+//     value: 992,
+//     date: new Date('2022-04-26T00:01:00.464Z')
+//   }
+// ]);

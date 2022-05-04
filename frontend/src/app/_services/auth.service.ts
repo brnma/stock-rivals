@@ -10,16 +10,25 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
 
-  private emptyUser: User = { username: '', profileImage: undefined, email: '' , groupCode: null, buyingPower: 50000, prevValue: 0, currValue: 0, rank: 0};
+  private emptyUser: User = {
+    username: '',
+    profileImage: undefined,
+    email: '',
+    groupCode: null,
+    buyingPower: 0,
+    prevValue: 0,
+    currValue: 0,
+    rank: 0
+  };
 
-  constructor(private http: HttpClient, private router:RouterModule, private cookie:CookieService) {
+  constructor(private http: HttpClient, private router: RouterModule, private cookie: CookieService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') ?? JSON.stringify(this.emptyUser))
     );
   }
 
- get  getUserSubject() {
-    return this.currentUserSubject
+  get getUserSubject() {
+    return this.currentUserSubject;
   }
 
   // Tries to get User is gucci
@@ -48,23 +57,35 @@ export class AuthService {
 
   getUpdatedUser() {
     // todo fix this weird bug
-    return this.http.get<User>(`http://localhost:3000/user/latestUser`).pipe(map((user) => {
-      return user
-    })).subscribe(user => {
-      const {prevValue, currValue, buyingPower, profileImage, username} = user
-      const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower, profileImage:profileImage, username:username}
+    return this.http
+      .get<User>(`http://localhost:3000/user/latestUser`)
+      .pipe(
+        map((user) => {
+          return user;
+        })
+      )
+      .subscribe((user) => {
+        const { prevValue, currValue, buyingPower, profileImage, username } = user;
+        const updated = {
+          ...this.getUserVal,
+          prevValue: prevValue,
+          currValue: currValue,
+          buyingPower: buyingPower,
+          profileImage: profileImage,
+          username: username
+        };
         // console.log(user)
         // console.log(this.getUserVal)
-      localStorage.setItem('currentUser', JSON.stringify(updated));
-      this.currentUserSubject.next(updated);
+        localStorage.setItem('currentUser', JSON.stringify(updated));
+        this.currentUserSubject.next(updated);
         // console.log(updated)
-    })
+      });
   }
 
   logout() {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next({} as User);
-    this.cookie.deleteAll()
-    window.location.reload()
+    this.cookie.deleteAll();
+    window.location.reload();
   }
 }
