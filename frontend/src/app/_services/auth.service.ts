@@ -48,10 +48,10 @@ export class AuthService {
 
   getUpdatedUser() {
     // todo fix this weird bug
-    return this.http.get<User>(`http://localhost:3000/user/latestUser`).subscribe(user => {
-      const {prevValue, currValue, buyingPower, profileImage, username} = user  
-      console.log(user)
-      console.log(this.getUserVal)
+    return this.http.get<User>(`http://localhost:3000/user/latestUser`).pipe(map((user) => {
+      return user
+    })).subscribe(user => {
+      const {prevValue, currValue, buyingPower, profileImage, username} = user
       const updated = {...this.getUserVal, prevValue:prevValue, currValue:currValue, buyingPower:buyingPower, profileImage:profileImage, username:username}
         // console.log(user)
         // console.log(this.getUserVal)

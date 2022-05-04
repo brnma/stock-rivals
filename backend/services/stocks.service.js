@@ -65,7 +65,7 @@ async function grabUserStocks(userId) {
       data: [
         {
           open: 169.11,
-          last: 0,
+          last: 1,
           close: 167.23
         }
       ]
@@ -208,6 +208,7 @@ async function findUser(userId) {
 function calcValue(stocks) {
   let value = 0;
   stocks.forEach((stock) => {
+    console.log(stocks)
     value += stock.shares * stock.value;
   });
   return value;

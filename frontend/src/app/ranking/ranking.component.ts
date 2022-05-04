@@ -59,7 +59,7 @@ export class RankingComponent implements OnInit {
   }
   ngOnInit(): void {
     // work on here TODO
-    this.userService.getAll().subscribe()
+    // this.userService.getAll().subscribe()
 
 
   // console.log(this.userService.getUsers());
@@ -77,18 +77,18 @@ export class RankingComponent implements OnInit {
 
 
     // @ts-ignore
-    // this.userService.getUsers().subscribe((array: User[]) => {
-    //     console.log(array);
-    //     this.Users = array.sort((a, b) => b.accountValue - a.accountValue);
-    //     let i: number = 1;
-    //     this.Users.map((user: User) => {
-    //       user.rank = i++;
-    //     });
-    //   },
-    //   (error: any) => {
-    //     console.log(error);
-    //   }
-    // );
+    this.userService.getUsers().subscribe((array: User[]) => {
+        console.log(array);
+        this.users = array.sort((a, b) => b.currValue- a.currValue);
+        let i: number = 1;
+        this.users.map((user: User) => {
+          user.rank = i++;
+        });
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 }
 

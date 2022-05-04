@@ -9,12 +9,13 @@ export class RankedUserComponent implements OnInit {
   @Input() rankedUser: User | undefined;
   name: string | undefined = "";
   rank: number | undefined = 1;
-  accountValue: number | undefined;
+  currentValue: number | undefined;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.rankedUser)
     this.name = this.rankedUser?.username;
-    this.accountValue = this.rankedUser?.currValue;
+    this.currentValue = this.rankedUser?.currValue;
     this.rank = this.rankedUser?.rank;
   }
 

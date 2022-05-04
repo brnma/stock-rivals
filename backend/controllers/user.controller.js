@@ -35,6 +35,7 @@ async function getLatestUser(req, res, next) {
 
 async function getAllUsers(req, res, next) {
   try {
+    console.log("here")
     const users = await userService.getAllUsers();
     res.json(users);
   } catch (error) {

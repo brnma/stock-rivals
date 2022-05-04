@@ -35,7 +35,7 @@ export class TradeComponent implements OnInit {
   yAxisLabel: string = 'Profit';
   timeline: boolean = true;
   colorScheme = {
-    name:"", selectable:true, group:ScaleType.Ordinal, 
+    name:"", selectable:true, group:ScaleType.Ordinal,
     domain: ['#a5d6a7']
   }
   constructor(private stockService:StockService,private _snackbar: MatSnackBar, private auth:AuthService) {}
@@ -48,7 +48,7 @@ export class TradeComponent implements OnInit {
     this.stockService.grabUserStocks().subscribe((val:any)=>{
       this.currStocksArr = val.stocks
       this.validStocksArr = true
-    }, (err) =>{
+    }, (err:any) =>{
       this._snackbar.open('Error getting user stocks oop', undefined, {duration:2000})
     })
   }
@@ -71,7 +71,7 @@ export class TradeComponent implements OnInit {
       this.resetAll()
       this.updatePrice()
       this.auth.getUpdatedUser()
-    },(err)=>{
+    },(err:any)=>{
       console.log(err)
       this.validTicker = false
       this._snackbar.open("Invalid ticker",undefined, {duration: 2000})
@@ -83,7 +83,7 @@ export class TradeComponent implements OnInit {
   resetAll() {
     this.actionType=""
   this.quantity=1
-  this.currPrice=0  
+  this.currPrice=0
   }
 
   updatePrice(){
@@ -99,12 +99,12 @@ export class TradeComponent implements OnInit {
         case "buy":
           // console.log(this.quantity)
           // console.log(this.currPrice)
-          this.stockService.buyStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
+          this.stockService.buyStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe((val:any)=>{
             // console.log(val)
             this._snackbar.open("Purchase successful!", undefined, {duration:2000})
             this.updateStocksArr()
             this.auth.getUpdatedUser()
-          }, (err) => {
+          }, (err:any) => {
             console.log(err)
             this._snackbar.open('Purchased failed oop', undefined, {duration:2000})
           })
@@ -112,12 +112,12 @@ export class TradeComponent implements OnInit {
         case "sell":
           // console.log(this.quantity)
           // console.log(this.currPrice)
-          this.stockService.sellStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(val=>{
+          this.stockService.sellStock(this.quantity, this.currPrice/this.quantity, this.symbol).subscribe(()=>{
             this.updateStocksArr()
             this.auth.getUpdatedUser()
             this._snackbar.open("Selling successful!", undefined, {duration:2000})
 
-          }, (err) => {
+          }, (err:any) => {
             console.log(err)
             this._snackbar.open('Selling failed oop', undefined, {duration:2000})
           })

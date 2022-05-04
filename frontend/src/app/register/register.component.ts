@@ -62,6 +62,8 @@ export class RegisterComponent implements OnInit {
 
       toSubmit.profileImage = `${this.f['username'].value}.${this.actualImg.type.split('/')[1]}`
 
+      // console.log(this.f)
+
       // Auths by register, login, then uploading the user's profile pic
       this.userService.register(toSubmit).subscribe((val:User) => {
         console.log(val)

@@ -94,11 +94,11 @@ async function changeUsername(newUsername, userId) {
       profileImage: `${newUsername}.${fileType}`
     }
   );
-
+    console.log(username);
   const oldFile = path.join(`${DIR}/${oldUsername}.${fileType}`);
   const newFile = path.join(`${DIR}/${newUsername}.${fileType}`);
 
-  console.log(oldFile);
-
+  // console.log(newFile);
+  // console.log(oldFile);
   fs.renameSync(oldFile, newFile);
 }

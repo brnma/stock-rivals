@@ -68,10 +68,10 @@ export class UserService {
       newUsername: newUsername
     })
   }
-  // getUsers() {
-  //  return this.http.get(`http://localhost:3030/user/g`);
-  //   // let temp:User[]= [this.user1, this.user2, this.user3, this.user4];
-  //   // return temp;
+  getUsers() {
+   return this.http.get(`http://localhost:3000/user/allusers`);
+    // let temp:User[]= [this.user1, this.user2, this.user3, this.user4];
+    // return temp;
 
-  // }
+  }
 }
