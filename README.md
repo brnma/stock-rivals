@@ -1,4 +1,4 @@
-# Stock Rivals Project for 3754
+# Stock Rivals Project
 
 2 Folders
 
